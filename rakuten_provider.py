@@ -30,11 +30,6 @@ EPG_URL = (
     "ElTirillas/RakutenTV/main/Rakuten_ES_epg.xml"
 )
 
-# Fuente pública alternativa: streams directos Rakuten España.
-FALLBACK_M3U_URL = (
-    "https://raw.githubusercontent.com/coderfast/IPTV/main/es_rakuten.m3u"
-)
-
 ORIGIN = "https://www.rakuten.tv"
 REFERER = "https://www.rakuten.tv/"
 
@@ -57,10 +52,6 @@ logging.basicConfig(
 log = logging.getLogger("rakuten-provider")
 
 _session = None
-
-
-class RakutenStreamingUnavailable(RuntimeError):
-    """La API de Rakuten no permite resolver streams desde este runner."""
 
 
 _stream_debug_lock = threading.Lock()
@@ -570,7 +561,7 @@ def get_channel_stream(channel):
                     # del idioma ni del ID del canal: abortar para no repetir
                     # 127 peticiones que devolverán el mismo HTTP 422.
                     if "undefined method 'name' for nil" in error_message.lower():
-                        raise RakutenStreamingUnavailable(
+                        raise RuntimeError(
                             "Rakuten ha rechazado la solicitud de streaming "
                             "con HTTP 422 (undefined method 'name' for nil). "
                             "Los metadatos son accesibles, pero el endpoint "
@@ -608,132 +599,6 @@ def get_channel_stream(channel):
     log.warning("No se obtuvo stream para %s tras probar idiomas: %s", channel.get("title", channel_id), ", ".join(languages))
     return channel_id, None
 
-
-
-# ============================================================
-# FUENTE ALTERNATIVA DE STREAMS
-# ============================================================
-
-def parse_m3u_entries(content):
-    """Lee entradas EXTINF y conserva sus metadatos y opciones M3U."""
-    entries = []
-    pending = []
-
-    for raw_line in content.splitlines():
-        line = raw_line.strip()
-        if not line or line == "#EXTM3U":
-            continue
-
-        if line.startswith("#EXTINF:"):
-            if pending:
-                pending = []
-            pending = [line]
-            continue
-
-        if pending:
-            if line.startswith("#"):
-                pending.append(line)
-                continue
-            if line.startswith(("https://", "http://")):
-                title = pending[0].split(",", 1)[1].strip() if "," in pending[0] else ""
-                entries.append({
-                    "title": title,
-                    "url": line,
-                    "lines": pending + [line],
-                })
-                pending = []
-
-    return entries
-
-
-def validate_fallback_url(url):
-    """Comprueba que el enlace devuelve una playlist HLS, no solo HTTP 200."""
-    try:
-        response = requests.get(
-            url,
-            headers={
-                "User-Agent": USER_AGENT,
-                "Accept": "application/vnd.apple.mpegurl,application/x-mpegURL,*/*",
-            },
-            timeout=(8, 15),
-            stream=True,
-        )
-        if response.status_code != 200:
-            return False
-        sample = next(response.iter_content(chunk_size=4096), b"")
-        return b"#EXTM3U" in sample[:4096]
-    except requests.RequestException:
-        return False
-    finally:
-        try:
-            response.close()
-        except (NameError, AttributeError):
-            pass
-
-
-def get_fallback_playlist():
-    """Descarga y filtra los streams públicos que sigan respondiendo desde Actions."""
-    log.warning("Activando fuente alternativa pública de Rakuten: %s", FALLBACK_M3U_URL)
-
-    response = requests.get(
-        FALLBACK_M3U_URL,
-        headers={"User-Agent": USER_AGENT},
-        timeout=(8, 30),
-    )
-    response.raise_for_status()
-
-    entries = parse_m3u_entries(response.text)
-    if not entries:
-        raise RuntimeError("La fuente alternativa no contiene entradas M3U válidas.")
-
-    # Evitar duplicados por nombre normalizado, conservando el primer enlace.
-    unique = []
-    seen = set()
-    for entry in entries:
-        key = normalize(entry["title"])
-        if not key or key in seen:
-            continue
-        seen.add(key)
-        unique.append(entry)
-
-    log.info("La fuente alternativa contiene %s canales únicos.", len(unique))
-
-    valid = []
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = {
-            executor.submit(validate_fallback_url, entry["url"]): entry
-            for entry in unique
-        }
-        for future in as_completed(futures):
-            entry = futures[future]
-            try:
-                if future.result():
-                    valid.append(entry)
-                else:
-                    log.warning("Stream alternativo no disponible desde Actions: %s", entry["title"])
-            except Exception as error:
-                log.warning("No se pudo comprobar %s: %s", entry["title"], error)
-
-    # Mantener el orden de la lista original.
-    valid_names = {normalize(entry["title"]) for entry in valid}
-    valid = [entry for entry in unique if normalize(entry["title"]) in valid_names]
-
-    if not valid:
-        raise RuntimeError(
-            "La API de Rakuten ha fallado y ningún stream de la fuente alternativa "
-            "ha superado la comprobación HLS desde GitHub Actions."
-        )
-
-    output = [f'#EXTM3U url-tvg="{EPG_URL}"\n']
-    for entry in valid:
-        output.append("\n".join(entry["lines"]) + "\n")
-
-    log.info(
-        "Fuente alternativa validada: %s/%s streams HLS accesibles.",
-        len(valid),
-        len(unique),
-    )
-    return "".join(output), len(valid)
 
 
 # ============================================================
@@ -914,6 +779,83 @@ def validate_playlist(expected_channels):
 
 
 # ============================================================
+# DIAGNÓSTICO DE URL HLS DIRECTA
+# ============================================================
+
+def test_direct_hls_url():
+    """Compara la URL HLS limpia con una variante de parámetros estables."""
+    base_url = (
+        "https://sci-fi-rakuten-tv-es.fast.rakuten.tv/"
+        "v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/"
+        "production-hls-aes128-rtv-6740-playout/master.m3u8"
+    )
+    variants = [
+        ("sin parámetros", {}),
+        ("parámetros estables", {
+            "ads.app_bundle": "com.rakutentv.web",
+            "ads.app_name": "RakutenTV",
+            "ads.device_make": "chrome",
+            "ads.device_model": "GENERIC",
+            "ads.device_year": "1970",
+            "ads.env": "prod",
+            "ads.market": "es",
+            "ads.network_name": "RakutenTV",
+            "ads.platform": "web",
+            "ads.placement": "1",
+            "ads.player_height": "1080",
+            "ads.player_width": "1920",
+            "ads.prodq": "1",
+            "ads.rtv_channel_id": "6740",
+            "ads.rtv_channel_name": "sci-fi-rakuten-tv_es",
+            "ads.rtv_content_id": "6740",
+            "ads.rtv_content_language": "es",
+            "ads.rtv_language": "es",
+            "channel_id": "6740",
+            "publishing_platform_id": "5",
+            "tenant_identifier": "rtv",
+        }),
+    ]
+
+    log.info("Probando URL HLS directa de Rakuten TV Sci-Fi España...")
+    for label, params in variants:
+        try:
+            response = requests.get(
+                base_url,
+                params=params,
+                headers={
+                    "User-Agent": USER_AGENT,
+                    "Accept": "application/vnd.apple.mpegurl,application/x-mpegURL,*/*",
+                    "Origin": ORIGIN,
+                    "Referer": REFERER,
+                },
+                timeout=TIMEOUT,
+                stream=True,
+                allow_redirects=True,
+            )
+            try:
+                sample = next(response.iter_content(chunk_size=2048), b"")
+                is_hls = b"#EXTM3U" in sample
+                log.info(
+                    "HLS directo [%s]: HTTP %s | tipo=%s | playlist=%s | URL final=%s",
+                    label,
+                    response.status_code,
+                    response.headers.get("Content-Type", "desconocido"),
+                    is_hls,
+                    response.url.split("?", 1)[0],
+                )
+                if sample and not is_hls:
+                    log.info(
+                        "Respuesta inicial [%s]: %s",
+                        label,
+                        sample[:180].decode("utf-8", errors="replace").replace("\\n", " "),
+                    )
+            finally:
+                response.close()
+        except requests.RequestException as error:
+            log.warning("HLS directo [%s]: error de conexión: %s", label, error)
+
+
+# ============================================================
 # MAIN
 # ============================================================
 
@@ -923,6 +865,9 @@ def main():
     log.info("========================================")
     log.info("       GENERADOR RAKUTEN TV ESPAÑA")
     log.info("========================================")
+
+    # Probar la URL HLS real capturada en el navegador antes de consultar la API.
+    test_direct_hls_url()
 
     # Mercado español. Consultar la clasificación vigente a la propia API.
     global CLASSIFICATION_ID
@@ -942,37 +887,25 @@ def main():
     # Rakuten/OpenCockpit resuelve los streams de uno en uno.
     # Mantener la misma secuencia evita diferencias por concurrencia y
     # permite comparar el comportamiento del endpoint con esa implementación.
-    fallback_used = False
+    for completed, channel in enumerate(channels, start=1):
+        channel_id, stream_url = get_channel_stream(channel)
 
-    try:
-        for completed, channel in enumerate(channels, start=1):
-            channel_id, stream_url = get_channel_stream(channel)
+        if stream_url:
+            streams[channel_id] = stream_url
 
-            if stream_url:
-                streams[channel_id] = stream_url
+        if completed % 10 == 0 or completed == len(channels):
+            log.info(
+                "Streams procesados: %s/%s",
+                completed,
+                len(channels)
+            )
 
-            if completed % 10 == 0 or completed == len(channels):
-                log.info(
-                    "Streams procesados: %s/%s",
-                    completed,
-                    len(channels)
-                )
-    except RakutenStreamingUnavailable as error:
-        log.warning("%s", error)
-        log.warning(
-            "La API de reproducción no está disponible desde este runner. "
-            "Se utilizará la lista pública alternativa."
-        )
-        playlist, total = get_fallback_playlist()
-        fallback_used = True
-
-    if not fallback_used:
-        playlist, total = generate_playlist(
-            channels,
-            categories,
-            streams,
-            epg_mapping
-        )
+    playlist, total = generate_playlist(
+        channels,
+        categories,
+        streams,
+        epg_mapping
+    )
 
     save_playlist(playlist)
     validate_playlist(total)
