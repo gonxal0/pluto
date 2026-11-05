@@ -34,9 +34,9 @@ ORIGIN = "https://rakuten.tv"
 REFERER = "https://rakuten.tv/"
 
 USER_AGENT = (
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "Mozilla/5.0 (X11; Linux x86_64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
-    "Chrome/133.0.0.0 Safari/537.36"
+    "Chrome/122.0.0.0 Safari/537.36"
 )
 
 TIMEOUT = (8, 20)
@@ -141,9 +141,9 @@ def create_session():
     # Origin/Referer sin www, como el generador público pandvan.
     session = requests.Session()
     session.headers.update({
+        "User-Agent": USER_AGENT,
         "Origin": ORIGIN,
         "Referer": REFERER,
-        "Accept": "application/json, text/plain, */*",
     })
     return session
 
@@ -211,12 +211,12 @@ def api_params():
 
 
 def api_headers():
+    # OpenCockpit utiliza únicamente estas tres cabeceras.
+    # requests añade Content-Type: application/json al enviar json=.
     return {
         "Origin": ORIGIN,
         "Referer": REFERER,
         "User-Agent": USER_AGENT,
-        "Accept": "application/json, text/plain, */*",
-        "Content-Type": "application/json",
     }
 
 
@@ -767,29 +767,21 @@ def main():
 
     streams = {}
 
-    # Solicitudes de reproducción concurrentes.
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        futures = [
-            executor.submit(get_channel_stream, channel)
-            for channel in channels
-        ]
+    # Rakuten/OpenCockpit resuelve los streams de uno en uno.
+    # Mantener la misma secuencia evita diferencias por concurrencia y
+    # permite comparar el comportamiento del endpoint con esa implementación.
+    for completed, channel in enumerate(channels, start=1):
+        channel_id, stream_url = get_channel_stream(channel)
 
-        completed = 0
+        if stream_url:
+            streams[channel_id] = stream_url
 
-        for future in as_completed(futures):
-            channel_id, stream_url = future.result()
-
-            if stream_url:
-                streams[channel_id] = stream_url
-
-            completed += 1
-
-            if completed % 10 == 0 or completed == len(futures):
-                log.info(
-                    "Streams procesados: %s/%s",
-                    completed,
-                    len(futures)
-                )
+        if completed % 10 == 0 or completed == len(channels):
+            log.info(
+                "Streams procesados: %s/%s",
+                completed,
+                len(channels)
+            )
 
     playlist, total = generate_playlist(
         channels,
