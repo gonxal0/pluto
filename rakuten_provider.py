@@ -10,7 +10,7 @@ import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import quote
 
-from curl_cffi import requests as curl_requests
+import requests
 
 
 # ============================================================
@@ -30,8 +30,8 @@ EPG_URL = (
     "ElTirillas/RakutenTV/main/Rakuten_ES_epg.xml"
 )
 
-ORIGIN = "https://www.rakuten.tv"
-REFERER = "https://www.rakuten.tv/"
+ORIGIN = "https://rakuten.tv"
+REFERER = "https://rakuten.tv/"
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -137,18 +137,14 @@ CATEGORY_ORDER = [
 # ============================================================
 
 def create_session():
-    # Rakuten valida también la huella TLS del navegador. requests estándar
-    # puede recibir un 422 aunque los parámetros JSON sean correctos.
-    # curl_cffi reproduce el handshake de Chrome, como la implementación
-    # de referencia de VibraVid.
-    session = curl_requests.Session(impersonate="chrome")
-
+    # Prueba controlada: usar requests convencional y los dominios
+    # Origin/Referer sin www, como el generador público pandvan.
+    session = requests.Session()
     session.headers.update({
         "Origin": ORIGIN,
         "Referer": REFERER,
         "Accept": "application/json, text/plain, */*",
     })
-
     return session
 
 
