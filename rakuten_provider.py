@@ -211,13 +211,22 @@ def api_params():
 
 
 def api_headers():
-    # OpenCockpit utiliza únicamente estas tres cabeceras.
-    # requests añade Content-Type: application/json al enviar json=.
-    return {
+    # Rakuten puede resolver el mercado a partir de la IP de origen.
+    # En GitHub Actions se puede proporcionar la IP española del usuario
+    # mediante el secreto RAKUTEN_CLIENT_IP para comprobar si el API confía
+    # en las cabeceras de IP reenviada. Nunca se incluye una IP fija en el repo.
+    headers = {
         "Origin": ORIGIN,
         "Referer": REFERER,
         "User-Agent": USER_AGENT,
     }
+
+    client_ip = os.getenv("RAKUTEN_CLIENT_IP", "").strip()
+    if client_ip:
+        headers["X-Forwarded-For"] = client_ip
+        headers["X-Real-IP"] = client_ip
+
+    return headers
 
 
 # ============================================================
