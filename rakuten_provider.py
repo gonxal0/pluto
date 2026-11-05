@@ -514,7 +514,7 @@ def channel_slug_candidates(channel):
         if value.startswith(("http://", "https://")):
             value = value.split("?", 1)[0].rstrip("/").split("/")[-1]
 
-        value = re.sub(r"^rakuten\\s*tv\\s*[-:–]?\\s*", "", value, flags=re.IGNORECASE)
+        value = re.sub(r"^rakuten\s*tv\s*[-:–]?\s*", "", value, flags=re.IGNORECASE)
         value = re.sub(r"-rakuten-tv-es$", "", value, flags=re.IGNORECASE)
         slug = normalize(value).replace(" ", "-").strip("-")
 
