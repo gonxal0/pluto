@@ -12,8 +12,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import quote
 
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+from curl_cffi import requests as curl_requests
 
 
 # ============================================================
@@ -140,27 +139,13 @@ CATEGORY_ORDER = [
 # ============================================================
 
 def create_session():
-    session = requests.Session()
-
-    retry = Retry(
-        total=2,
-        connect=2,
-        read=2,
-        backoff_factor=0.4,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=["GET", "POST"],
-    )
-
-    adapter = HTTPAdapter(
-        max_retries=retry,
-        pool_connections=MAX_WORKERS,
-        pool_maxsize=MAX_WORKERS,
-    )
-
-    session.mount("https://", adapter)
+    # Rakuten valida también la huella TLS del navegador. requests estándar
+    # puede recibir un 422 aunque los parámetros JSON sean correctos.
+    # curl_cffi reproduce el handshake de Chrome, como la implementación
+    # de referencia de VibraVid.
+    session = curl_requests.Session(impersonate="chrome")
 
     session.headers.update({
-        "User-Agent": USER_AGENT,
         "Origin": ORIGIN,
         "Referer": REFERER,
         "Accept": "application/json, text/plain, */*",
