@@ -5,7 +5,6 @@ import re
 import time
 import threading
 import unicodedata
-import uuid
 import xml.etree.ElementTree as ET
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -516,9 +515,7 @@ def get_channel_stream(channel):
     })
 
     for audio_language in languages:
-        # Rakuten valida metadatos del dispositivo incluso para canales FAST.
-        # La implementación pública actualizada (octubre de 2026) incluye
-        # device_uid, publisher_provided_id y datos del navegador Chrome.
+        # Payload original utilizado por el cliente web y por implementaciones publicas.
         data = {
             "audio_language": audio_language,
             "audio_quality": "2.0",
@@ -526,14 +523,8 @@ def get_channel_stream(channel):
             "content_id": channel_id,
             "content_type": "live_channels",
             "device_serial": "not implemented",
-            "device_uid": str(uuid.uuid4()),
-            "publisher_provided_id": str(uuid.uuid4()),
             "player": "web:HLS-NONE:NONE",
-            "device_make": "chrome",
-            "device_model": "GENERIC",
-            "device_year": 1970,
             "strict_video_quality": False,
-            "hdr_type": "NONE",
             "video_type": "stream",
             "subtitle_language": "MIS",
         }
