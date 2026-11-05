@@ -1,0 +1,102 @@
+name: Inspect Xiaomi TV+ APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/xiaomi_apk_inspect.yaml"
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout analysis branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Fetch APK from main without changing it
+        shell: bash
+        run: |
+          git fetch origin main --depth=1
+          git show "FETCH_HEAD:com.mitv.tvhome.mitvplus_3.9.9-58_minAPI23(nodpi)_apkmirror.com.apk" > /tmp/xiaomi-tvplus.apk
+          test -s /tmp/xiaomi-tvplus.apk
+          echo "APK_SIZE=$(stat -c%s /tmp/xiaomi-tvplus.apk)" >> "$GITHUB_ENV"
+
+      - name: Install JADX
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip openjdk-17-jre-headless
+          curl -fL --retry 3 -o /tmp/jadx.zip https://github.com/skylot/jadx/releases/download/v1.5.1/jadx-1.5.1.zip
+          mkdir -p /tmp/jadx
+          unzip -q /tmp/jadx.zip -d /tmp/jadx
+          chmod +x /tmp/jadx/bin/jadx
+
+      - name: Decompile and extract API clues
+        shell: bash
+        run: |
+          /tmp/jadx/bin/jadx --no-res -d /tmp/xiaomi-decoded /tmp/xiaomi-tvplus.apk
+          python3 - <<'PY'
+          import os, re, zipfile
+          from pathlib import Path
+
+          root = Path("/tmp/xiaomi-decoded")
+          out = Path("xiaomi_apk_report.txt")
+          apk = Path("/tmp/xiaomi-tvplus.apk")
+          url_re = re.compile(r'''https?://[A-Za-z0-9._~:/?#\[\]@!$&'()*+,;=%-]+''')
+          domain_re = re.compile(r'''(?i)(?:https?://)?([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+)''')
+          keywords = ("api", "channel", "stream", "playback", "playlist", "epg", "live", "m3u8",
+                      "gizmo", "mitv", "auth", "token", "media", "source", "region", "country",
+                      "endpoint", "graphql", "retrofit", "okhttp")
+          domains, urls, contexts = set(), set(), []
+          scanned = 0
+          for p in root.rglob("*"):
+              if not p.is_file() or p.suffix.lower() not in (".java", ".xml", ".json", ".txt", ".properties"):
+                  continue
+              try: data = p.read_text(encoding="utf-8", errors="ignore")
+              except Exception: continue
+              scanned += 1
+              for u in url_re.findall(data):
+                  urls.add(u.rstrip('.,;)"\\''))
+              for d in domain_re.findall(data):
+                  if "." in d and len(d) < 200: domains.add(d.lower())
+              lines = data.splitlines()
+              for i, line in enumerate(lines):
+                  low = line.lower()
+                  if any(k in low for k in keywords):
+                      contexts.append((str(p.relative_to(root)), i + 1, line.strip()[:500]))
+          manifest = root / "resources" / "AndroidManifest.xml"
+          with out.open("w", encoding="utf-8") as f:
+              f.write("XIAOMI TV+ APK STATIC ANALYSIS\\n")
+              f.write(f"APK: {apk.name} ({apk.stat().st_size} bytes)\\n")
+              f.write(f"JADX scanned files: {scanned}\\n\\n")
+              f.write("=== MANIFEST ===\\n")
+              f.write(manifest.read_text(encoding="utf-8", errors="ignore") if manifest.exists() else "Manifest not found in JADX output")
+              f.write("\\n\\n=== DOMAINS ===\\n")
+              f.write("\\n".join(sorted(domains)) or "(none)")
+              f.write("\\n\\n=== URLS ===\\n")
+              f.write("\\n".join(sorted(urls)) or "(none)")
+              f.write("\\n\\n=== RELEVANT SOURCE LINES ===\\n")
+              for path, line, content in contexts[:2500]:
+                  f.write(f"{path}:{line}: {content}\\n")
+          print(f"Report generated: {out.stat().st_size} bytes; {len(urls)} URLs; {len(domains)} domains; {len(contexts)} relevant lines")
+          PY
+
+      - name: Commit report to analysis branch
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add xiaomi_apk_report.txt
+          if git diff --cached --quiet; then
+            echo "No report changes."
+            exit 0
+          fi
+          git commit -m "Add Xiaomi TV+ APK API analysis report"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
