@@ -635,7 +635,7 @@ def parse_m3u_entries(content):
                 pending.append(line)
                 continue
             if line.startswith(("https://", "http://")):
-                title = line.rsplit(",", 1)[-1].strip() if "," in pending[0] else ""
+                title = pending[0].split(",", 1)[1].strip() if "," in pending[0] else ""
                 entries.append({
                     "title": title,
                     "url": line,
@@ -724,9 +724,9 @@ def get_fallback_playlist():
             "ha superado la comprobación HLS desde GitHub Actions."
         )
 
-    output = [f'#EXTM3U url-tvg="{EPG_URL}"\\n']
+    output = [f'#EXTM3U url-tvg="{EPG_URL}"\n']
     for entry in valid:
-        output.append("\\n".join(entry["lines"]) + "\\n")
+        output.append("\n".join(entry["lines"]) + "\n")
 
     log.info(
         "Fuente alternativa validada: %s/%s streams HLS accesibles.",
