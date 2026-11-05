@@ -5,13 +5,11 @@ import re
 import threading
 import time
 import unicodedata
-import uuid
 import xml.etree.ElementTree as ET
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import quote
 
-import requests
 from curl_cffi import requests as curl_requests
 
 
