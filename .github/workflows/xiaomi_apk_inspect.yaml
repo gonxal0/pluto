@@ -40,7 +40,13 @@ jobs:
       - name: Decompile and extract API clues
         shell: bash
         run: |
-          /tmp/jadx/bin/jadx -d /tmp/xiaomi-decoded /tmp/xiaomi-tvplus.apk
+          set +e
+          /tmp/jadx/bin/jadx -d /tmp/xiaomi-decoded /tmp/xiaomi-tvplus.apk 2>&1 | tee /tmp/jadx.log
+          JADX_STATUS=${PIPESTATUS[0]}
+          set -e
+          echo "JADX exit code: ${JADX_STATUS} (continuing if partial output exists)"
+          test -d /tmp/xiaomi-decoded
+          test -f /tmp/xiaomi-decoded/resources/AndroidManifest.xml || find /tmp/xiaomi-decoded -maxdepth 3 -iname 'AndroidManifest.xml' -print
           python3 - <<'PY'
           import re
           from pathlib import Path
