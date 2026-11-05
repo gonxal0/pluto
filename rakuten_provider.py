@@ -145,6 +145,23 @@ def create_session():
         "Origin": ORIGIN,
         "Referer": REFERER,
     })
+
+    # Una cabecera X-Forwarded-For no cambia la IP real de salida.
+    # Para que Rakuten vea una IP española, el tráfico debe salir por un
+    # proxy/VPN real ubicado en España, configurado como secreto de Actions.
+    proxy_url = os.getenv("RAKUTEN_PROXY", "").strip()
+    if proxy_url:
+        session.proxies.update({
+            "http": proxy_url,
+            "https": proxy_url,
+        })
+        log.info("Proxy de salida configurado para Rakuten.")
+    else:
+        log.warning(
+            "RAKUTEN_PROXY no está configurado: las peticiones saldrán "
+            "directamente desde GitHub Actions."
+        )
+
     return session
 
 
@@ -211,22 +228,12 @@ def api_params():
 
 
 def api_headers():
-    # Rakuten puede resolver el mercado a partir de la IP de origen.
-    # En GitHub Actions se puede proporcionar la IP española del usuario
-    # mediante el secreto RAKUTEN_CLIENT_IP para comprobar si el API confía
-    # en las cabeceras de IP reenviada. Nunca se incluye una IP fija en el repo.
-    headers = {
+    # La IP de salida real la determina la conexión/proxy, no estas cabeceras.
+    return {
         "Origin": ORIGIN,
         "Referer": REFERER,
         "User-Agent": USER_AGENT,
     }
-
-    client_ip = os.getenv("RAKUTEN_CLIENT_IP", "").strip()
-    if client_ip:
-        headers["X-Forwarded-For"] = client_ip
-        headers["X-Real-IP"] = client_ip
-
-    return headers
 
 
 # ============================================================
@@ -742,8 +749,14 @@ def main():
     log.info("========================================")
 
     # Mercado español fijado manualmente (es / clasificación 5).
-    # No usar /me/start: detecta el país por IP y bloquea los runners
-    # de GitHub Actions que salen por una IP no española.
+    # Rakuten también comprueba la IP pública de salida: para GitHub Actions
+    # se necesita un proxy/VPN real con salida española.
+    if not os.getenv("RAKUTEN_PROXY", "").strip():
+        raise RuntimeError(
+            "Falta el secreto RAKUTEN_PROXY. Configura una URL de proxy/VPN "
+            "con salida española en Settings > Secrets and variables > Actions."
+        )
+
     channels = get_live_channels()
     categories = get_categories()
     epg_mapping = get_epg_mapping()
