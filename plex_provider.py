@@ -1,8 +1,12 @@
 
 import gzip
 import json
+import logging
 import os
+import re
 import uuid
+from concurrent.futures import ThreadPoolExecutor
+from io import BytesIO
 from urllib.parse import quote
 
 import requests
@@ -14,7 +18,7 @@ from urllib3.util.retry import Retry
 # CONFIGURACIÓN
 # ============================================================
 
-OUTPUT = "plex_es.m3u"
+OUTPUT_FILE = "plex_es.m3u"
 
 CATALOG_URL = (
     "https://github.com/matthuisman/i.mjh.nz/raw/"
@@ -26,13 +30,12 @@ EPG_URL = (
     "refs/heads/master/Plex/es.xml.gz"
 )
 
-ANONYMOUS_TOKEN_URL = (
-    "https://clients.plex.tv/api/v2/users/anonymous"
-)
+TOKEN_URL = "https://clients.plex.tv/api/v2/users/anonymous"
 
-PLAYBACK_BASE_URL = (
-    "https://epg.provider.plex.tv/library/parts"
-)
+PLAYBACK_BASE_URL = "https://epg.provider.plex.tv/library/parts"
+
+REGION = "es"
+TIMEOUT = (5, 15)
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -40,34 +43,149 @@ USER_AGENT = (
     "Chrome/133.0.0.0 Safari/537.36"
 )
 
-
-# ============================================================
-# SESIÓN HTTP
-# ============================================================
-
-session = requests.Session()
-
-session.headers.update({
-    "User-Agent": USER_AGENT,
-})
-
-retry = Retry(
-    total=3,
-    connect=3,
-    read=2,
-    backoff_factor=0.5,
-    status_forcelist=[429, 500, 502, 503, 504],
-    allowed_methods=["GET"],
-    respect_retry_after_header=True,
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-adapter = HTTPAdapter(
-    max_retries=retry,
-    pool_connections=5,
-    pool_maxsize=5,
-)
+log = logging.getLogger("plex-provider")
 
-session.mount("https://", adapter)
+
+# ============================================================
+# CATEGORÍAS DE PLEX
+# ============================================================
+
+CATEGORY_TRANSLATIONS = {
+    "featured": "Destacados",
+    "bingeworthy": "Para maratonear",
+    "movies": "Películas",
+    "true crime": "Crimen real",
+    "truecrime": "Crimen real",
+    "news": "Noticias",
+    "sports": "Deportes",
+    "reality": "Reality",
+    "classics": "Clásicos",
+    "adrenaline & sci-fi": "Acción y ciencia ficción",
+    "adrenaline and sci-fi": "Acción y ciencia ficción",
+    "comedy": "Comedia",
+    "daytime tv & games": "Programas diurnos y concursos",
+    "daytime tv and games": "Programas diurnos y concursos",
+    "explore": "Explorar",
+    "food, home & culture": "Cocina, hogar y cultura",
+    "food home culture": "Cocina, hogar y cultura",
+    "kids & family": "Niños y familia",
+    "kids and family": "Niños y familia",
+    "en español": "En español",
+    "en espanol": "En español",
+    "global": "Internacional",
+    "music": "Música",
+}
+
+CATEGORY_ORDER = [
+    "Destacados",
+    "Para maratonear",
+    "Películas",
+    "Crimen real",
+    "Noticias",
+    "Deportes",
+    "Reality",
+    "Clásicos",
+    "Acción y ciencia ficción",
+    "Comedia",
+    "Programas diurnos y concursos",
+    "Explorar",
+    "Cocina, hogar y cultura",
+    "Niños y familia",
+    "En español",
+    "Internacional",
+    "Música",
+    "Otros",
+]
+
+# Clasificación orientativa cuando el catálogo no incluye categoría.
+KEYWORD_RULES = [
+    ("Noticias", [
+        "news", "noticias", "cnn", "bbc news", "euronews",
+        "nbc news", "cbs news", "sky news", "breaking"
+    ]),
+    ("Deportes", [
+        "sport", "sports", "deportes", "football", "soccer",
+        "nfl", "nba", "mlb", "tennis", "golf", "motorsport"
+    ]),
+    ("Películas", [
+        "movie", "movies", "film", "films", "cinema",
+        "cine", "action movies", "western"
+    ]),
+    ("Crimen real", [
+        "true crime", "crime", "murder", "detective",
+        "forensic", "police", "investigation"
+    ]),
+    ("Reality", [
+        "reality", "real housewives", "dating", "wedding",
+        "competition", "survival"
+    ]),
+    ("Clásicos", [
+        "classic", "classics", "retro", "vintage", "oldies"
+    ]),
+    ("Acción y ciencia ficción", [
+        "sci-fi", "scifi", "science fiction", "adventure",
+        "action", "fantasy", "superhero"
+    ]),
+    ("Comedia", [
+        "comedy", "comedies", "sitcom", "funny"
+    ]),
+    ("Programas diurnos y concursos", [
+        "game show", "gameshow", "quiz", "daytime",
+        "talk show", "talkshow"
+    ]),
+    ("Cocina, hogar y cultura", [
+        "food", "cooking", "cuisine", "home", "garden",
+        "travel", "culture", "lifestyle"
+    ]),
+    ("Niños y familia", [
+        "kids", "children", "family", "cartoon", "animation",
+        "junior", "preschool"
+    ]),
+    ("Música", [
+        "music", "musical", "concert", "radio", "hits"
+    ]),
+]
+
+
+# ============================================================
+# HTTP
+# ============================================================
+
+def create_session():
+    session = requests.Session()
+
+    retry = Retry(
+        total=2,
+        connect=2,
+        read=2,
+        backoff_factor=0.3,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["GET", "POST"],
+    )
+
+    adapter = HTTPAdapter(
+        max_retries=retry,
+        pool_connections=8,
+        pool_maxsize=8,
+    )
+
+    session.mount("https://", adapter)
+    session.mount("http://", adapter)
+
+    session.headers.update({
+        "User-Agent": USER_AGENT,
+        "Accept": "*/*",
+    })
+
+    return session
+
+
+SESSION = create_session()
 
 
 # ============================================================
@@ -75,40 +193,40 @@ session.mount("https://", adapter)
 # ============================================================
 
 def get_catalog():
-    print("Descargando catálogo de Plex...")
+    log.info("Descargando catálogo Plex...")
 
-    response = session.get(
+    response = SESSION.get(
         CATALOG_URL,
-        timeout=(10, 30),
+        timeout=TIMEOUT
     )
 
     response.raise_for_status()
 
-    try:
-        content = gzip.decompress(response.content)
-    except gzip.BadGzipFile:
-        content = response.content
+    content = response.content
 
-    data = json.loads(content)
+    try:
+        content = gzip.decompress(content)
+    except gzip.BadGzipFile:
+        pass
+
+    data = json.loads(content.decode("utf-8"))
 
     channels = data.get("channels", {})
 
     if not isinstance(channels, dict) or not channels:
-        raise RuntimeError(
-            "El catálogo de Plex no contiene canales."
-        )
+        raise RuntimeError("El catálogo Plex no contiene canales.")
 
-    print(f"Canales en catálogo global: {len(channels)}")
+    log.info("Canales encontrados en catálogo: %s", len(channels))
 
     return channels
 
 
 # ============================================================
-# AUTENTICACIÓN ANÓNIMA PLEX
+# TOKEN ANÓNIMO
 # ============================================================
 
 def get_anonymous_token():
-    print("Solicitando token anónimo de Plex...")
+    log.info("Solicitando token Plex...")
 
     client_id = uuid.uuid4().hex
 
@@ -126,11 +244,11 @@ def get_anonymous_token():
         "X-Plex-Client-Identifier": client_id,
     }
 
-    response = requests.post(
-        ANONYMOUS_TOKEN_URL,
+    response = SESSION.post(
+        TOKEN_URL,
         headers=headers,
         params=params,
-        timeout=(10, 20),
+        timeout=TIMEOUT
     )
 
     response.raise_for_status()
@@ -138,161 +256,282 @@ def get_anonymous_token():
     token = response.json().get("authToken")
 
     if not token:
-        raise RuntimeError(
-            "Plex no ha devuelto un token anónimo."
-        )
+        raise RuntimeError("Plex no ha devuelto un token válido.")
 
-    print("Token de Plex obtenido correctamente.")
+    log.info("Token Plex obtenido correctamente.")
 
     return token
+
+
+# ============================================================
+# LIMPIEZA DE TEXTO
+# ============================================================
+
+def clean_text(value, default=""):
+    if value is None:
+        return default
+
+    value = str(value)
+    value = value.replace("\r", " ").replace("\n", " ")
+    value = value.replace('"', "'")
+
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def normalize(value):
+    value = clean_text(value).lower()
+    value = value.replace("_", " ").replace("-", " ")
+    return re.sub(r"\s+", " ", value).strip()
+
+
+# ============================================================
+# DETECCIÓN DE CATEGORÍAS
+# ============================================================
+
+def extract_category_values(channel):
+    """
+    Busca categorías en distintos formatos posibles del catálogo.
+    """
+
+    values = []
+
+    fields = [
+        "category",
+        "categories",
+        "group",
+        "groups",
+        "genre",
+        "genres",
+        "tags",
+        "collection",
+        "collections",
+    ]
+
+    for field in fields:
+        value = channel.get(field)
+
+        if isinstance(value, str):
+            values.append(value)
+
+        elif isinstance(value, list):
+            for item in value:
+                if isinstance(item, str):
+                    values.append(item)
+
+                elif isinstance(item, dict):
+                    for key in ("name", "title", "tag", "label"):
+                        if item.get(key):
+                            values.append(str(item[key]))
+
+        elif isinstance(value, dict):
+            for key in ("name", "title", "tag", "label"):
+                if value.get(key):
+                    values.append(str(value[key]))
+
+    return values
+
+
+def classify_channel(channel):
+    """
+    1. Utiliza la categoría original si está disponible.
+    2. Si no existe, intenta deducirla por el nombre.
+    3. Si no hay información suficiente, usa Otros.
+    """
+
+    categories = extract_category_values(channel)
+
+    for raw_category in categories:
+        normalized = normalize(raw_category)
+
+        if normalized in CATEGORY_TRANSLATIONS:
+            return CATEGORY_TRANSLATIONS[normalized]
+
+    name = normalize(channel.get("name", ""))
+
+    for category, keywords in KEYWORD_RULES:
+        for keyword in keywords:
+            if normalize(keyword) in name:
+                return category
+
+    # Detectar canales cuyo nombre indica claramente idioma español.
+    if any(x in name for x in [
+        "espanol", "español", "latino", "latina"
+    ]):
+        return "En español"
+
+    return "Otros"
 
 
 # ============================================================
 # GENERACIÓN M3U
 # ============================================================
 
-def clean(value):
-    return str(value or "").replace('"', "'")
+def channel_sort_key(item):
+    category, name, _ = item
+
+    try:
+        category_index = CATEGORY_ORDER.index(category)
+    except ValueError:
+        category_index = len(CATEGORY_ORDER)
+
+    return category_index, name.lower()
 
 
-def format_extinf(channel_id, channel):
-    name = clean(channel.get("name"))
-    logo = clean(channel.get("logo", ""))
-    chno = channel.get("chno", "")
-
-    if not str(chno).isdigit():
-        chno = ""
-
-    attrs = {
-        "channel-id": channel_id,
-        "tvg-id": channel_id,
-        "tvg-chno": chno,
-        "tvg-name": name,
-        "tvg-logo": logo,
-        "group-title": "Plex España",
-    }
-
-    metadata = " ".join(
-        f'{key}="{clean(value)}"'
-        for key, value in attrs.items()
-    )
-
-    display_name = name.replace(",", "")
+def build_channel_url(channel_id, token):
+    safe_id = quote(str(channel_id), safe="")
 
     return (
-        f"#EXTINF:-1 {metadata},{display_name}\n"
-    )
-
-
-def build_stream_url(channel_id, token):
-    return (
-        f"{PLAYBACK_BASE_URL}/"
-        f"{quote(str(channel_id), safe='')}/"
+        f"{PLAYBACK_BASE_URL}/{safe_id}/"
         f"?X-Plex-Token={quote(token, safe='')}"
     )
 
 
-def generate(channels, token):
-    print("Filtrando canales de España...")
+def build_extinf(channel_id, channel, category):
+    name = clean_text(channel.get("name"), str(channel_id))
+    logo = clean_text(channel.get("logo", ""))
 
-    selected = []
+    # El ID del canal se conserva aunque no tenga EPG.
+    tvg_id = clean_text(
+        channel.get("tvg-id") or channel.get("epg_id") or channel_id
+    )
+
+    channel_number = clean_text(channel.get("chno", ""))
+
+    attributes = [
+        f'tvg-id="{tvg_id}"',
+        f'tvg-name="{name}"',
+        f'tvg-logo="{logo}"',
+        f'group-title="{category}"',
+    ]
+
+    if channel_number:
+        attributes.append(f'tvg-chno="{channel_number}"')
+
+    return (
+        f"#EXTINF:-1 {' '.join(attributes)},"
+        f"{name}\n"
+    )
+
+
+def generate_playlist(channels, token):
+    log.info("Preparando canales de España...")
+
+    entries = []
+    seen_ids = set()
 
     for channel_id, channel in channels.items():
 
         regions = channel.get("regions", [])
 
-        if isinstance(regions, str):
-            regions = [regions]
-
-        regions = {
-            str(region).lower()
-            for region in regions
-        }
-
-        if "es" not in regions:
+        if REGION not in regions:
             continue
 
-        if not channel.get("name"):
+        if channel_id in seen_ids:
             continue
 
-        selected.append((channel_id, channel))
+        name = clean_text(channel.get("name"))
 
-    selected.sort(
-        key=lambda item: item[1].get(
-            "name", ""
-        ).lower()
-    )
+        if not name:
+            continue
 
-    if not selected:
-        raise RuntimeError(
-            "No hay canales de Plex disponibles para España."
+        category = classify_channel(channel)
+
+        extinf = build_extinf(
+            channel_id,
+            channel,
+            category
         )
 
-    lines = [
+        stream_url = build_channel_url(
+            channel_id,
+            token
+        )
+
+        entries.append((
+            category,
+            name,
+            extinf + stream_url + "\n"
+        ))
+
+        seen_ids.add(channel_id)
+
+    if not entries:
+        raise RuntimeError(
+            "No se han encontrado canales para España."
+        )
+
+    entries.sort(key=channel_sort_key)
+
+    output = [
         f'#EXTM3U url-tvg="{EPG_URL}"\n'
     ]
 
-    for channel_id, channel in selected:
+    current_category = None
 
-        lines.append(
-            format_extinf(channel_id, channel)
-        )
+    for category, name, content in entries:
+        if category != current_category:
+            current_category = category
+            log.info("Categoría: %s", category)
 
-        lines.append(
-            build_stream_url(channel_id, token) + "\n"
-        )
+        output.append(content)
 
-    content = "".join(lines)
+    playlist = "".join(output)
 
-    if content.count("#EXTINF:") != len(selected):
-        raise RuntimeError(
-            "El número de entradas M3U no coincide."
-        )
+    log.info("Canales españoles generados: %s", len(entries))
 
-    if "X-Plex-Token=" not in content:
-        raise RuntimeError(
-            "No se han generado URLs con token Plex."
-        )
-
-    return content, len(selected)
+    return playlist, len(entries)
 
 
 # ============================================================
-# VALIDACIÓN
-# ============================================================
-
-def validate(content, count):
-    if not content.startswith("#EXTM3U"):
-        raise RuntimeError("Cabecera M3U incorrecta.")
-
-    if count == 0:
-        raise RuntimeError("Playlist vacía.")
-
-    if content.count("#EXTINF:") != count:
-        raise RuntimeError("Número de canales incorrecto.")
-
-    if content.count("X-Plex-Token=") != count:
-        raise RuntimeError(
-            "No todas las URLs tienen token Plex."
-        )
-
-
-# ============================================================
-# ESCRITURA SEGURA
+# GUARDADO Y VALIDACIÓN
 # ============================================================
 
 def save_playlist(content):
-    temp_file = OUTPUT + ".tmp"
+    temporary_file = OUTPUT_FILE + ".tmp"
 
     with open(
-        temp_file,
+        temporary_file,
         "w",
         encoding="utf-8",
-        newline="\n",
+        newline="\n"
     ) as file:
         file.write(content)
 
-    os.replace(temp_file, OUTPUT)
+    os.replace(temporary_file, OUTPUT_FILE)
+
+    log.info("Lista guardada: %s", OUTPUT_FILE)
+
+
+def validate_playlist(expected_channels):
+    if not os.path.exists(OUTPUT_FILE):
+        raise RuntimeError("No se ha generado el archivo M3U.")
+
+    with open(
+        OUTPUT_FILE,
+        "r",
+        encoding="utf-8"
+    ) as file:
+        content = file.read()
+
+    extinf_count = content.count("#EXTINF:")
+    url_count = sum(
+        1 for line in content.splitlines()
+        if line.startswith("https://epg.provider.plex.tv/")
+    )
+
+    if not content.startswith("#EXTM3U"):
+        raise RuntimeError("Cabecera M3U incorrecta.")
+
+    if extinf_count != expected_channels:
+        raise RuntimeError("Número de canales incorrecto.")
+
+    if url_count != expected_channels:
+        raise RuntimeError("Hay canales sin URL de reproducción.")
+
+    log.info(
+        "Validación correcta: %s canales.",
+        expected_channels
+    )
 
 
 # ============================================================
@@ -300,32 +539,33 @@ def save_playlist(content):
 # ============================================================
 
 def main():
-    print()
-    print("================================")
-    print("       PLEX TV ESPAÑA")
-    print("================================")
+    log.info("====================================")
+    log.info("      GENERADOR PLEX ESPAÑA")
+    log.info("====================================")
 
-    channels = get_catalog()
+    # Catálogo y token se obtienen simultáneamente.
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        catalog_future = executor.submit(get_catalog)
+        token_future = executor.submit(get_anonymous_token)
 
-    token = get_anonymous_token()
+        channels = catalog_future.result()
+        token = token_future.result()
 
-    content, count = generate(
+    playlist, total = generate_playlist(
         channels,
-        token,
+        token
     )
 
-    validate(content, count)
+    save_playlist(playlist)
 
-    save_playlist(content)
+    validate_playlist(total)
 
-    print("--------------------------------")
-    print(f"Canales España: {count}")
-    print(f"Archivo: {OUTPUT}")
-    print("EPG: Plex España")
-    print("Autenticación: token anónimo")
-    print("--------------------------------")
-    print("Generación completada.")
+    log.info("Generación Plex finalizada correctamente.")
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        log.exception("Error generando la lista Plex.")
+        raise
