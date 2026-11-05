@@ -2,7 +2,6 @@
 import logging
 import os
 import re
-import threading
 import time
 import unicodedata
 import xml.etree.ElementTree as ET
@@ -51,7 +50,7 @@ logging.basicConfig(
 
 log = logging.getLogger("rakuten-provider")
 
-_thread_local = threading.local()
+_session = requests.Session()
 
 _stream_debug_lock = threading.Lock()
 _stream_debug_logged = False
@@ -137,8 +136,7 @@ CATEGORY_ORDER = [
 # ============================================================
 
 def create_session():
-    # Prueba controlada: usar requests convencional y los dominios
-    # Origin/Referer sin www, como el generador público pandvan.
+    # Reutilizar una única sesión HTTP para conservar cookies/estado de Rakuten.
     session = requests.Session()
     session.headers.update({
         "User-Agent": USER_AGENT,
@@ -149,10 +147,7 @@ def create_session():
 
 
 def get_session():
-    if not hasattr(_thread_local, "session"):
-        _thread_local.session = create_session()
-
-    return _thread_local.session
+    return _session
 
 
 # ============================================================
@@ -750,15 +745,11 @@ def main():
     log.info("       GENERADOR RAKUTEN TV ESPAÑA")
     log.info("========================================")
 
-    # Canales, categorías y EPG se consultan en paralelo.
-    with ThreadPoolExecutor(max_workers=3) as executor:
-        channels_future = executor.submit(get_live_channels)
-        categories_future = executor.submit(get_categories)
-        epg_future = executor.submit(get_epg_mapping)
-
-        channels = channels_future.result()
-        categories = categories_future.result()
-        epg_mapping = epg_future.result()
+    # Mantener una única sesión HTTP, igual que OpenCockpit.
+    # Consultar secuencialmente conserva cookies/estado antes de pedir streams.
+    channels = get_live_channels()
+    categories = get_categories()
+    epg_mapping = get_epg_mapping()
 
     log.info(
         "Solicitando streams de %s canales...",
