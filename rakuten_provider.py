@@ -486,117 +486,113 @@ def find_logo(channel):
 
 
 # ============================================================
-# OBTENER STREAM
+# OBTENER STREAM HLS DIRECTO
 # ============================================================
 
+# Patrón confirmado con dos canales españoles (Sci-Fi y Thriller).
+# El hash y la plantilla de ruta son comunes en ambas capturas.
+DIRECT_HLS_HASH = "0547f18649bd788bec7b67b746e47670f558b6b2"
+DIRECT_HLS_SUFFIX = "-rakuten-tv-es.fast.rakuten.tv"
+
+
+def channel_slug_candidates(channel):
+    """
+    Obtiene posibles slugs técnicos a partir de los metadatos del canal.
+    Rakuten puede incluir un slug explícito; si no, se deriva del título.
+    """
+    values = []
+    for key in ("slug", "seo_slug", "channel_slug", "url_slug", "name", "title"):
+        value = channel.get(key)
+        if isinstance(value, str) and value.strip():
+            values.append(value.strip())
+
+    candidates = []
+    seen = set()
+
+    for value in values:
+        # Si el campo contiene una URL, extraer el primer componente útil.
+        if value.startswith(("http://", "https://")):
+            value = value.split("?", 1)[0].rstrip("/").split("/")[-1]
+
+        value = re.sub(r"^rakuten\\s*tv\\s*[-:–]?\\s*", "", value, flags=re.IGNORECASE)
+        value = re.sub(r"-rakuten-tv-es$", "", value, flags=re.IGNORECASE)
+        slug = normalize(value).replace(" ", "-").strip("-")
+
+        if slug and slug not in seen:
+            seen.add(slug)
+            candidates.append(slug)
+
+    return candidates
+
+
 def get_channel_stream(channel):
-    channel_id = channel.get("id")
-    labels = channel.get("labels") or {}
-    channel_languages = labels.get("languages") or []
+    """
+    Construye y valida el HLS público del canal sin llamar a /avod/streamings.
+    Se comprueba la playlist real antes de incluir la URL en la M3U.
+    """
+    channel_id = str(channel.get("id") or "").strip()
+    title = clean_text(channel.get("title"), channel_id)
 
-    # Rakuten valida audio_language contra los idiomas del canal.
-    # Probar primero los idiomas anunciados y después el idioma de España
-    # y ENG, igual que la implementación pública de referencia.
-    languages = []
-    for item in channel_languages:
-        if isinstance(item, dict):
-            language = item.get("id")
-            if language and language not in languages:
-                languages.append(language)
-    for language in ("SPA", "ENG"):
-        if language not in languages:
-            languages.append(language)
+    if not channel_id:
+        return channel_id, None
 
-    params = api_params()
-    params.update({
-        "device_stream_audio_quality": "2.0",
-        "device_stream_hdr_type": "NONE",
-        "device_stream_video_quality": "FHD",
-        # La API de referencia envía el booleano como literal minúsculo.
-        "disable_dash_legacy_packages": "false",
-    })
+    slugs = channel_slug_candidates(channel)
+    if not slugs:
+        log.warning("No se pudo derivar el slug HLS de %s.", title)
+        return channel_id, None
 
-    for audio_language in languages:
-        # Payload original utilizado por el cliente web y por implementaciones publicas.
-        data = {
-            "audio_language": audio_language,
-            "audio_quality": "2.0",
-            "classification_id": int(CLASSIFICATION_ID),
-            "content_id": channel_id,
-            "content_type": "live_channels",
-            "device_serial": "not implemented",
-            "player": "web:HLS-NONE:NONE",
-            "strict_video_quality": False,
-            "video_type": "stream",
-            "subtitle_language": "MIS",
-        }
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "application/vnd.apple.mpegurl,application/x-mpegURL,*/*",
+        "Origin": ORIGIN,
+        "Referer": REFERER,
+    }
+
+    for slug in slugs:
+        url = (
+            f"https://{slug}{DIRECT_HLS_SUFFIX}/v1/master/"
+            f"{DIRECT_HLS_HASH}/production-hls-aes128-rtv-"
+            f"{channel_id}-playout/master.m3u8"
+        )
+
+        response = None
         try:
-            response = get_session().post(
-                f"{API_BASE}/avod/streamings",
-                params=params,
-                headers=api_headers(),
-                json=data,
+            response = requests.get(
+                url,
+                headers=headers,
                 timeout=TIMEOUT,
+                stream=True,
+                allow_redirects=True,
             )
-            if response.status_code >= 400:
-                # Guardar el primer diagnóstico, pero continuar si Rakuten
-                # rechaza únicamente el idioma de audio probado.
-                payload = None
-                try:
-                    payload = response.json()
-                except Exception:
-                    pass
-                error_text = response.text[:1000]
-                if response.status_code == 422 and payload:
-                    errors = payload.get("errors") or []
-                    error_code = str(errors[0].get("code") or "") if errors else ""
-                    error_message = str(errors[0].get("message") or "") if errors else ""
+            sample = next(response.iter_content(chunk_size=2048), b"")
 
-                    if "language" in error_code.lower() or "language" in error_message.lower():
-                        log.debug("Idioma %s no aceptado para %s; probando siguiente.", audio_language, channel_id)
-                        continue
+            if response.status_code == 200 and b"#EXTM3U" in sample:
+                log.info(
+                    "HLS directo válido: %s | slug=%s",
+                    title,
+                    slug,
+                )
+                return channel_id, response.url.split("?", 1)[0]
 
-                    # Este error se ha reproducido en todos los canales cuando
-                    # Rakuten rechaza la sesión/mercado del cliente. No depende
-                    # del idioma ni del ID del canal: abortar para no repetir
-                    # 127 peticiones que devolverán el mismo HTTP 422.
-                    if "undefined method 'name' for nil" in error_message.lower():
-                        raise RuntimeError(
-                            "Rakuten ha rechazado la solicitud de streaming "
-                            "con HTTP 422 (undefined method 'name' for nil). "
-                            "Los metadatos son accesibles, pero el endpoint "
-                            "de reproducción no está aceptando este entorno "
-                            "de cliente/mercado. No se reintentarán los demás "
-                            "canales porque devolverían el mismo error."
-                        )
-
-                global _stream_debug_logged
-                with _stream_debug_lock:
-                    if not _stream_debug_logged:
-                        _stream_debug_logged = True
-                        log.error("DIAGNÓSTICO RAKUTEN: HTTP %s para canal %s (%s)", response.status_code, channel_id, channel.get("title", channel_id))
-                        log.error("DIAGNÓSTICO RAKUTEN: cuerpo de respuesta: %s", error_text)
-                        log.error("DIAGNÓSTICO RAKUTEN: idioma=%s parámetros=%s JSON=%s", audio_language, params, data)
-                # Un error distinto de idioma no se arregla probando más
-                # variantes; pasar al siguiente canal sin abortar el workflow.
-                break
-            payload = response.json()
-            stream_infos = (payload.get("data") or {}).get("stream_infos") or []
-            for stream in stream_infos:
-                url = stream.get("url")
-                if url and ".m3u8" in url:
-                    return channel_id, url
-            # Respuesta válida sin stream: probar siguiente idioma.
-        except RuntimeError:
-            # Error global del endpoint: propagarlo al main sin ocultarlo.
-            raise
+            log.debug(
+                "HLS no válido para %s con slug %s: HTTP %s, tipo=%s",
+                title,
+                slug,
+                response.status_code,
+                response.headers.get("Content-Type", "desconocido"),
+            )
         except requests.RequestException as error:
-            log.warning("Error de red obteniendo stream de %s: %s", channel.get("title", channel_id), error)
-            break
-        except Exception as error:
-            log.warning("Error obteniendo stream de %s (%s): %s", channel.get("title", channel_id), audio_language, error)
+            log.debug("Error probando HLS de %s (%s): %s", title, slug, error)
+        finally:
+            if response is not None:
+                response.close()
 
-    log.warning("No se obtuvo stream para %s tras probar idiomas: %s", channel.get("title", channel_id), ", ".join(languages))
+    log.warning(
+        "No se encontró una URL HLS válida para %s (ID %s). Slugs probados: %s",
+        title,
+        channel_id,
+        ", ".join(slugs),
+    )
     return channel_id, None
 
 
@@ -779,83 +775,6 @@ def validate_playlist(expected_channels):
 
 
 # ============================================================
-# DIAGNÓSTICO DE URL HLS DIRECTA
-# ============================================================
-
-def test_direct_hls_url():
-    """Compara la URL HLS limpia con una variante de parámetros estables."""
-    base_url = (
-        "https://sci-fi-rakuten-tv-es.fast.rakuten.tv/"
-        "v1/master/0547f18649bd788bec7b67b746e47670f558b6b2/"
-        "production-hls-aes128-rtv-6740-playout/master.m3u8"
-    )
-    variants = [
-        ("sin parámetros", {}),
-        ("parámetros estables", {
-            "ads.app_bundle": "com.rakutentv.web",
-            "ads.app_name": "RakutenTV",
-            "ads.device_make": "chrome",
-            "ads.device_model": "GENERIC",
-            "ads.device_year": "1970",
-            "ads.env": "prod",
-            "ads.market": "es",
-            "ads.network_name": "RakutenTV",
-            "ads.platform": "web",
-            "ads.placement": "1",
-            "ads.player_height": "1080",
-            "ads.player_width": "1920",
-            "ads.prodq": "1",
-            "ads.rtv_channel_id": "6740",
-            "ads.rtv_channel_name": "sci-fi-rakuten-tv_es",
-            "ads.rtv_content_id": "6740",
-            "ads.rtv_content_language": "es",
-            "ads.rtv_language": "es",
-            "channel_id": "6740",
-            "publishing_platform_id": "5",
-            "tenant_identifier": "rtv",
-        }),
-    ]
-
-    log.info("Probando URL HLS directa de Rakuten TV Sci-Fi España...")
-    for label, params in variants:
-        try:
-            response = requests.get(
-                base_url,
-                params=params,
-                headers={
-                    "User-Agent": USER_AGENT,
-                    "Accept": "application/vnd.apple.mpegurl,application/x-mpegURL,*/*",
-                    "Origin": ORIGIN,
-                    "Referer": REFERER,
-                },
-                timeout=TIMEOUT,
-                stream=True,
-                allow_redirects=True,
-            )
-            try:
-                sample = next(response.iter_content(chunk_size=2048), b"")
-                is_hls = b"#EXTM3U" in sample
-                log.info(
-                    "HLS directo [%s]: HTTP %s | tipo=%s | playlist=%s | URL final=%s",
-                    label,
-                    response.status_code,
-                    response.headers.get("Content-Type", "desconocido"),
-                    is_hls,
-                    response.url.split("?", 1)[0],
-                )
-                if sample and not is_hls:
-                    log.info(
-                        "Respuesta inicial [%s]: %s",
-                        label,
-                        sample[:180].decode("utf-8", errors="replace").replace("\\n", " "),
-                    )
-            finally:
-                response.close()
-        except requests.RequestException as error:
-            log.warning("HLS directo [%s]: error de conexión: %s", label, error)
-
-
-# ============================================================
 # MAIN
 # ============================================================
 
@@ -865,9 +784,6 @@ def main():
     log.info("========================================")
     log.info("       GENERADOR RAKUTEN TV ESPAÑA")
     log.info("========================================")
-
-    # Probar la URL HLS real capturada en el navegador antes de consultar la API.
-    test_direct_hls_url()
 
     # Mercado español. Consultar la clasificación vigente a la propia API.
     global CLASSIFICATION_ID
