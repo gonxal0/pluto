@@ -549,9 +549,25 @@ def get_channel_stream(channel):
                     errors = payload.get("errors") or []
                     error_code = str(errors[0].get("code") or "") if errors else ""
                     error_message = str(errors[0].get("message") or "") if errors else ""
+
                     if "language" in error_code.lower() or "language" in error_message.lower():
                         log.debug("Idioma %s no aceptado para %s; probando siguiente.", audio_language, channel_id)
                         continue
+
+                    # Este error se ha reproducido en todos los canales cuando
+                    # Rakuten rechaza la sesión/mercado del cliente. No depende
+                    # del idioma ni del ID del canal: abortar para no repetir
+                    # 127 peticiones que devolverán el mismo HTTP 422.
+                    if "undefined method 'name' for nil" in error_message.lower():
+                        raise RuntimeError(
+                            "Rakuten ha rechazado la solicitud de streaming "
+                            "con HTTP 422 (undefined method 'name' for nil). "
+                            "Los metadatos son accesibles, pero el endpoint "
+                            "de reproducción no está aceptando este entorno "
+                            "de cliente/mercado. No se reintentarán los demás "
+                            "canales porque devolverían el mismo error."
+                        )
+
                 global _stream_debug_logged
                 with _stream_debug_lock:
                     if not _stream_debug_logged:
@@ -569,6 +585,9 @@ def get_channel_stream(channel):
                 if url and ".m3u8" in url:
                     return channel_id, url
             # Respuesta válida sin stream: probar siguiente idioma.
+        except RuntimeError:
+            # Error global del endpoint: propagarlo al main sin ocultarlo.
+            raise
         except requests.RequestException as error:
             log.warning("Error de red obteniendo stream de %s: %s", channel.get("title", channel_id), error)
             break
