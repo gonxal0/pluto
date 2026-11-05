@@ -243,70 +243,40 @@ def api_headers():
 def get_live_channels():
     log.info("Consultando canales de Rakuten España...")
 
-    all_channels = []
-    seen_ids = set()
+    params = {
+        "classification_id": 5,
+        "device_identifier": "web",
+        "locale": "es",
+        "market_code": "es",
+        "page": 1,
+        "per_page": 100,
+    }
 
-    for page in range(1, MAX_PAGES + 1):
-        params = api_params()
-        params.update({
-            "page": page,
-            "per_page": PAGE_SIZE,
-        })
-
-        response = get_session().get(
-            f"{API_BASE}/live_channels",
-            params=params,
-            headers=api_headers(),
-            timeout=TIMEOUT,
-        )
-
-        response.raise_for_status()
-
-        payload = response.json()
-        channels = payload.get("data", [])
-
-        if not isinstance(channels, list):
-            raise RuntimeError(
-                "Respuesta inesperada de la API de Rakuten."
-            )
-
-        if not channels:
-            break
-
-        added = 0
-
-        for channel in channels:
-            channel_id = channel.get("id")
-
-            if not channel_id or channel_id in seen_ids:
-                continue
-
-            seen_ids.add(channel_id)
-            all_channels.append(channel)
-            added += 1
-
-        log.info(
-            "Página %s: %s canales nuevos",
-            page,
-            added
-        )
-
-        if len(channels) < PAGE_SIZE:
-            break
-
-    if not all_channels:
-        raise RuntimeError(
-            "Rakuten no ha devuelto canales para España. "
-            "Comprueba la geolocalización de GitHub Actions."
-        )
-
-    log.info(
-        "Total de canales encontrados: %s",
-        len(all_channels)
+    response = get_session().get(
+        f"{API_BASE}/live_channels",
+        params=params,
+        headers=api_headers(),
+        timeout=TIMEOUT,
     )
 
-    return all_channels
+    log.info("URL solicitada: %s", response.url)
+    log.info("HTTP: %s", response.status_code)
+    log.info("Respuesta Rakuten: %s", response.text[:5000])
 
+    response.raise_for_status()
+
+    payload = response.json()
+    channels = payload.get("data", [])
+
+    if not isinstance(channels, list) or not channels:
+        raise RuntimeError(
+            "Rakuten no ha devuelto canales: "
+            + response.text[:2000]
+        )
+
+    log.info("Canales recibidos: %s", len(channels))
+
+    return channels
 
 # ============================================================
 # OBTENER CATEGORÍAS
