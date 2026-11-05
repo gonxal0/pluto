@@ -33,8 +33,8 @@ EPG_URL = (
     "ElTirillas/RakutenTV/main/Rakuten_ES_epg.xml"
 )
 
-ORIGIN = "https://rakuten.tv"
-REFERER = "https://rakuten.tv/"
+ORIGIN = "https://www.rakuten.tv"
+REFERER = "https://www.rakuten.tv/"
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -490,7 +490,7 @@ def get_channel_stream(channel):
         first_language = languages[0]
 
         if isinstance(first_language, dict):
-            audio_language = first_language.get("id", "MIS")
+            audio_language = first_language.get("id", "SPA")
 
     params = api_params()
     params.update({
