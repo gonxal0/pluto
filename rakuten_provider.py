@@ -30,8 +30,8 @@ EPG_URL = (
     "ElTirillas/RakutenTV/main/Rakuten_ES_epg.xml"
 )
 
-ORIGIN = "https://rakuten.tv"
-REFERER = "https://rakuten.tv/"
+ORIGIN = "https://www.rakuten.tv"
+REFERER = "https://www.rakuten.tv/"
 
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) "
@@ -142,6 +142,7 @@ def create_session():
     session.headers.update({
         "User-Agent": USER_AGENT,
         "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "es-ES,es;q=0.9,en;q=0.8",
         "Origin": ORIGIN,
         "Referer": REFERER,
     })
