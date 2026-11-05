@@ -5,6 +5,7 @@ import re
 import time
 import threading
 import unicodedata
+import uuid
 import xml.etree.ElementTree as ET
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -21,7 +22,7 @@ OUTPUT_FILE = "rakuten_es.m3u"
 
 API_BASE = "https://gizmo.rakuten.tv/v3"
 
-CLASSIFICATION_ID = 5
+CLASSIFICATION_ID = 5  # fallback si Rakuten no devuelve la clasificación
 COUNTRY = "es"
 LOCALE = "es"
 
@@ -146,21 +147,6 @@ def create_session():
         "Referer": REFERER,
     })
 
-    # Una cabecera X-Forwarded-For no cambia la IP real de salida.
-    # Para que Rakuten vea una IP española, el tráfico debe salir por un
-    # proxy/VPN real ubicado en España, configurado como secreto de Actions.
-    proxy_url = os.getenv("RAKUTEN_PROXY", "").strip()
-    if proxy_url:
-        session.proxies.update({
-            "http": proxy_url,
-            "https": proxy_url,
-        })
-        log.info("Proxy de salida configurado para Rakuten.")
-    else:
-        log.warning(
-            "RAKUTEN_PROXY no está configurado: las peticiones saldrán "
-            "directamente desde GitHub Actions."
-        )
 
     return session
 
@@ -225,6 +211,38 @@ def api_params():
         "locale": LOCALE,
         "market_code": COUNTRY,
     }
+
+
+def get_classification_id():
+    """
+    Obtiene la clasificación predeterminada del mercado español desde Rakuten.
+    Evita depender de un ID fijo si la API lo ha cambiado.
+    """
+    try:
+        response = get_session().get(
+            f"{API_BASE}/classifications",
+            params={
+                "device_identifier": "web",
+                "locale": LOCALE,
+                "market_code": COUNTRY,
+            },
+            headers=api_headers(),
+            timeout=TIMEOUT,
+        )
+        response.raise_for_status()
+        entries = response.json().get("data") or []
+        chosen = next((item for item in entries if item.get("default")), None)
+        if chosen is None and entries:
+            chosen = entries[-1]
+        if chosen and chosen.get("numerical_id") is not None:
+            value = int(chosen["numerical_id"])
+            log.info("Clasificación Rakuten España detectada: %s", value)
+            return value
+    except Exception as error:
+        log.warning("No se pudo consultar /classifications: %s", error)
+
+    log.warning("Se utilizará la clasificación de respaldo: %s", CLASSIFICATION_ID)
+    return CLASSIFICATION_ID
 
 
 def api_headers():
@@ -498,6 +516,9 @@ def get_channel_stream(channel):
     })
 
     for audio_language in languages:
+        # Rakuten valida metadatos del dispositivo incluso para canales FAST.
+        # La implementación pública actualizada (octubre de 2026) incluye
+        # device_uid, publisher_provided_id y datos del navegador Chrome.
         data = {
             "audio_language": audio_language,
             "audio_quality": "2.0",
@@ -505,10 +526,16 @@ def get_channel_stream(channel):
             "content_id": channel_id,
             "content_type": "live_channels",
             "device_serial": "not implemented",
+            "device_uid": str(uuid.uuid4()),
+            "publisher_provided_id": str(uuid.uuid4()),
             "player": "web:HLS-NONE:NONE",
+            "device_make": "chrome",
+            "device_model": "GENERIC",
+            "device_year": 1970,
             "strict_video_quality": False,
-            "subtitle_language": "MIS",
+            "hdr_type": "NONE",
             "video_type": "stream",
+            "subtitle_language": "MIS",
         }
         try:
             response = get_session().post(
@@ -748,14 +775,9 @@ def main():
     log.info("       GENERADOR RAKUTEN TV ESPAÑA")
     log.info("========================================")
 
-    # Mercado español fijado manualmente (es / clasificación 5).
-    # Rakuten también comprueba la IP pública de salida: para GitHub Actions
-    # se necesita un proxy/VPN real con salida española.
-    if not os.getenv("RAKUTEN_PROXY", "").strip():
-        raise RuntimeError(
-            "Falta el secreto RAKUTEN_PROXY. Configura una URL de proxy/VPN "
-            "con salida española en Settings > Secrets and variables > Actions."
-        )
+    # Mercado español. Consultar la clasificación vigente a la propia API.
+    global CLASSIFICATION_ID
+    CLASSIFICATION_ID = get_classification_id()
 
     channels = get_live_channels()
     categories = get_categories()
