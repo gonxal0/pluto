@@ -525,7 +525,9 @@ def get_channel_stream(channel):
                         log.error("DIAGNÓSTICO RAKUTEN: HTTP %s para canal %s (%s)", response.status_code, channel_id, channel.get("title", channel_id))
                         log.error("DIAGNÓSTICO RAKUTEN: cuerpo de respuesta: %s", error_text)
                         log.error("DIAGNÓSTICO RAKUTEN: idioma=%s parámetros=%s JSON=%s", audio_language, params, data)
-                response.raise_for_status()
+                # Un error distinto de idioma no se arregla probando más
+                # variantes; pasar al siguiente canal sin abortar el workflow.
+                break
             payload = response.json()
             stream_infos = (payload.get("data") or {}).get("stream_infos") or []
             for stream in stream_infos:
@@ -533,8 +535,9 @@ def get_channel_stream(channel):
                 if url and ".m3u8" in url:
                     return channel_id, url
             # Respuesta válida sin stream: probar siguiente idioma.
-        except requests.HTTPError:
-            raise
+        except requests.RequestException as error:
+            log.warning("Error de red obteniendo stream de %s: %s", channel.get("title", channel_id), error)
+            break
         except Exception as error:
             log.warning("Error obteniendo stream de %s (%s): %s", channel.get("title", channel_id), audio_language, error)
 
