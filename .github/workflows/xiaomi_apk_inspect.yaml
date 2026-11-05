@@ -17,7 +17,7 @@ jobs:
       - name: Checkout analysis branch
         uses: actions/checkout@v4
         with:
-          ref: \${{ github.ref_name }}
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
 
       - name: Fetch APK from main without changing it
@@ -102,4 +102,4 @@ jobs:
             exit 0
           fi
           git commit -m "Add Xiaomi TV+ APK API analysis report"
-          git push origin "HEAD:\${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
