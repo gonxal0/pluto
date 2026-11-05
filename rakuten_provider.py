@@ -497,11 +497,11 @@ DIRECT_HLS_SUFFIX = "-rakuten-tv-es.fast.rakuten.tv"
 
 def channel_slug_candidates(channel):
     """
-    Obtiene posibles slugs técnicos a partir de los metadatos del canal.
-    Rakuten puede incluir un slug explícito; si no, se deriva del título.
+    Prioriza el identificador técnico del canal de Rakuten.
+    El título visible no siempre coincide con el subdominio HLS.
     """
     values = []
-    for key in ("slug", "seo_slug", "channel_slug", "url_slug", "name", "title"):
+    for key in ("streaming_slug", "slug", "seo_slug", "channel_slug", "url_slug", "id"):
         value = channel.get(key)
         if isinstance(value, str) and value.strip():
             values.append(value.strip())
@@ -510,12 +510,11 @@ def channel_slug_candidates(channel):
     seen = set()
 
     for value in values:
-        # Si el campo contiene una URL, extraer el primer componente útil.
         if value.startswith(("http://", "https://")):
             value = value.split("?", 1)[0].rstrip("/").split("/")[-1]
 
-        value = re.sub(r"^rakuten\s*tv\s*[-:–]?\s*", "", value, flags=re.IGNORECASE)
         value = re.sub(r"-rakuten-tv-es$", "", value, flags=re.IGNORECASE)
+        value = re.sub(r"-rakuten-tv$", "", value, flags=re.IGNORECASE)
         slug = normalize(value).replace(" ", "-").strip("-")
 
         if slug and slug not in seen:
@@ -527,19 +526,26 @@ def channel_slug_candidates(channel):
 
 def get_channel_stream(channel):
     """
-    Construye y valida el HLS público del canal sin llamar a /avod/streamings.
-    Se comprueba la playlist real antes de incluir la URL en la M3U.
+    Construye el HLS directo usando numerical_id (no el ID textual).
+    Valida la playlist antes de devolverla.
     """
-    channel_id = str(channel.get("id") or "").strip()
-    title = clean_text(channel.get("title"), channel_id)
+    content_id = str(channel.get("id") or "").strip()
+    playback_id = str(channel.get("numerical_id") or "").strip()
+    title = clean_text(channel.get("title"), content_id)
 
-    if not channel_id:
-        return channel_id, None
+    if not content_id or not playback_id or not playback_id.isdigit():
+        log.warning(
+            "Falta numerical_id válido para %s (id=%s, numerical_id=%s).",
+            title,
+            content_id,
+            playback_id or "vacío",
+        )
+        return content_id, None
 
     slugs = channel_slug_candidates(channel)
     if not slugs:
-        log.warning("No se pudo derivar el slug HLS de %s.", title)
-        return channel_id, None
+        log.warning("No se pudo obtener el slug técnico de %s.", title)
+        return content_id, None
 
     headers = {
         "User-Agent": USER_AGENT,
@@ -552,7 +558,7 @@ def get_channel_stream(channel):
         url = (
             f"https://{slug}{DIRECT_HLS_SUFFIX}/v1/master/"
             f"{DIRECT_HLS_HASH}/production-hls-aes128-rtv-"
-            f"{channel_id}-playout/master.m3u8"
+            f"{playback_id}-playout/master.m3u8"
         )
 
         response = None
@@ -568,11 +574,13 @@ def get_channel_stream(channel):
 
             if response.status_code == 200 and b"#EXTM3U" in sample:
                 log.info(
-                    "HLS directo válido: %s | slug=%s",
+                    "HLS directo válido: %s | id=%s | numerical_id=%s | slug=%s",
                     title,
+                    content_id,
+                    playback_id,
                     slug,
                 )
-                return channel_id, response.url.split("?", 1)[0]
+                return content_id, response.url.split("?", 1)[0]
 
             log.debug(
                 "HLS no válido para %s con slug %s: HTTP %s, tipo=%s",
@@ -588,12 +596,12 @@ def get_channel_stream(channel):
                 response.close()
 
     log.warning(
-        "No se encontró una URL HLS válida para %s (ID %s). Slugs probados: %s",
+        "No se encontró HLS para %s (numerical_id=%s). Slugs probados: %s",
         title,
-        channel_id,
+        playback_id,
         ", ".join(slugs),
     )
-    return channel_id, None
+    return content_id, None
 
 
 
