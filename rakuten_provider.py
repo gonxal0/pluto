@@ -445,33 +445,67 @@ def match_epg_id(channel, epg_mapping):
 # ============================================================
 
 def find_logo(channel):
+    """
+    Busca el artwork del canal en toda la respuesta de Rakuten.
+    Prioriza el arte negativo (logo sobre fondo transparente/oscuro) y
+    la variante de 308 px, como la utilizada por la web oficial.
+    """
+    candidates = []
+
+    def collect(value, path=""):
+        if isinstance(value, dict):
+            for key, item in value.items():
+                collect(item, f"{path}.{key}" if path else str(key))
+        elif isinstance(value, list):
+            for index, item in enumerate(value):
+                collect(item, f"{path}[{index}]")
+        elif isinstance(value, str):
+            url = value.strip()
+            if url.startswith("https://") and (
+                "images-3.rakuten.tv/" in url
+                or "rakuten.tv/" in url
+            ):
+                candidates.append((path.lower(), url))
+
+    collect(channel)
+
+    if candidates:
+        def logo_score(candidate):
+            path, url = candidate
+            value = (path + " " + url).lower()
+            score = 0
+
+            if "artwork-negative" in value:
+                score += 100
+            if "width308" in value:
+                score += 30
+            if "quality90" in value:
+                score += 10
+            if "logo" in value:
+                score += 20
+            if "poster" in value or "background" in value:
+                score -= 30
+
+            return score
+
+        candidates.sort(key=logo_score, reverse=True)
+        return candidates[0][1]
+
+    # Compatibilidad con posibles formatos antiguos de la API.
     images = channel.get("images", {})
-
     if isinstance(images, dict):
-        preferred_keys = [
-            "logo",
-            "channel_logo",
-            "artwork",
-            "thumbnail",
-            "poster",
-        ]
-
-        for key in preferred_keys:
+        for key in ("logo", "channel_logo", "artwork", "thumbnail", "poster"):
             value = images.get(key)
-
             if isinstance(value, str) and value.startswith("http"):
                 return value
-
             if isinstance(value, dict):
                 for subkey in ("url", "src", "href"):
                     url = value.get(subkey)
-
                     if isinstance(url, str) and url.startswith("http"):
                         return url
 
     for key in ("logo", "image", "image_url"):
         value = channel.get(key)
-
         if isinstance(value, str) and value.startswith("http"):
             return value
 
