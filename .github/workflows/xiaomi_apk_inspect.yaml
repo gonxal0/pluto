@@ -49,8 +49,8 @@ jobs:
           out = Path("xiaomi_apk_report.txt")
           apk = Path("/tmp/xiaomi-tvplus.apk")
           nl = chr(10)
-          url_re = re.compile(r"https?://[^\\s\\\"'<>]+")
-          domain_re = re.compile(r"(?i)(?:https?://)?([a-z0-9.-]+\\.[a-z]{2,})")
+          url_re = re.compile(r"https?://[^ ]+")
+          domain_re = re.compile(r"(?i)(?:https?://)?([a-z0-9.-]+[.][a-z]{2,})")
           keywords = ("api", "channel", "stream", "playback", "playlist", "epg", "live", "m3u8",
                       "gizmo", "mitv", "auth", "token", "media", "source", "region", "country",
                       "endpoint", "graphql", "retrofit", "okhttp")
