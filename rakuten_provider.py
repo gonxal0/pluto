@@ -424,27 +424,20 @@ def get_epg_mapping():
 
 
 def match_epg_id(channel, epg_mapping):
-    """
-    Intenta asociar el nombre del canal de la API
-    con el display-name del XMLTV.
-    """
-
+    """Devuelve el ID XMLTV si hay coincidencia real; None si no la hay."""
     title = normalize(channel.get("title", ""))
+    candidates = {
+        title,
+        re.sub(r"^rakuten tv ", "", title).strip(),
+        re.sub(r" - rakuten tv$", "", title).strip(),
+        re.sub(r" rakuten tv$", "", title).strip(),
+    }
 
-    if title in epg_mapping:
-        return epg_mapping[title]
+    for candidate in candidates:
+        if candidate and candidate in epg_mapping:
+            return epg_mapping[candidate]
 
-    # Prueba quitando el prefijo Rakuten TV.
-    simplified = re.sub(
-        r"^rakuten tv ",
-        "",
-        title
-    ).strip()
-
-    if simplified in epg_mapping:
-        return epg_mapping[simplified]
-
-    return clean_text(channel.get("id"))
+    return None
 
 
 # ============================================================
@@ -486,123 +479,97 @@ def find_logo(channel):
 
 
 # ============================================================
-# OBTENER STREAM HLS DIRECTO
+# OBTENER STREAM HLS DESDE LA API OFICIAL DE RAKUTEN
 # ============================================================
-
-# Patrón confirmado con dos canales españoles (Sci-Fi y Thriller).
-# El hash y la plantilla de ruta son comunes en ambas capturas.
-DIRECT_HLS_HASH = "0547f18649bd788bec7b67b746e47670f558b6b2"
-DIRECT_HLS_SUFFIX = "-rakuten-tv-es.fast.rakuten.tv"
-
-
-def channel_slug_candidates(channel):
-    """
-    Prioriza el identificador técnico del canal de Rakuten.
-    El título visible no siempre coincide con el subdominio HLS.
-    """
-    values = []
-    for key in ("streaming_slug", "slug", "seo_slug", "channel_slug", "url_slug", "id"):
-        value = channel.get(key)
-        if isinstance(value, str) and value.strip():
-            values.append(value.strip())
-
-    candidates = []
-    seen = set()
-
-    for value in values:
-        if value.startswith(("http://", "https://")):
-            value = value.split("?", 1)[0].rstrip("/").split("/")[-1]
-
-        value = re.sub(r"-rakuten-tv-es$", "", value, flags=re.IGNORECASE)
-        value = re.sub(r"-rakuten-tv$", "", value, flags=re.IGNORECASE)
-        slug = normalize(value).replace(" ", "-").strip("-")
-
-        if slug and slug not in seen:
-            seen.add(slug)
-            candidates.append(slug)
-
-    return candidates
-
 
 def get_channel_stream(channel):
     """
-    Construye el HLS directo usando numerical_id (no el ID textual).
-    Valida la playlist antes de devolverla.
+    Solicita a la API oficial de Rakuten la URL HLS del canal.
+    Debe ejecutarse desde una conexión con acceso al mercado español.
+    No construye URLs ni utiliza listas o fuentes externas.
     """
     content_id = str(channel.get("id") or "").strip()
-    playback_id = str(channel.get("numerical_id") or "").strip()
     title = clean_text(channel.get("title"), content_id)
 
-    if not content_id or not playback_id or not playback_id.isdigit():
-        log.warning(
-            "Falta numerical_id válido para %s (id=%s, numerical_id=%s).",
-            title,
-            content_id,
-            playback_id or "vacío",
-        )
+    if not content_id:
         return content_id, None
 
-    slugs = channel_slug_candidates(channel)
-    if not slugs:
-        log.warning("No se pudo obtener el slug técnico de %s.", title)
-        return content_id, None
+    languages = (
+        channel.get("labels", {}).get("languages", [])
+        if isinstance(channel.get("labels"), dict)
+        else []
+    )
+    audio_language = "MIS"
+    if languages and isinstance(languages[0], dict):
+        audio_language = languages[0].get("id") or "MIS"
 
-    headers = {
-        "User-Agent": USER_AGENT,
-        "Accept": "application/vnd.apple.mpegurl,application/x-mpegURL,*/*",
-        "Origin": ORIGIN,
-        "Referer": REFERER,
+    params = {
+        **api_params(),
+        "device_stream_audio_quality": "2.0",
+        "device_stream_hdr_type": "NONE",
+        "device_stream_video_quality": "FHD",
+        "disable_dash_legacy_packages": "false",
     }
 
-    for slug in slugs:
-        url = (
-            f"https://{slug}{DIRECT_HLS_SUFFIX}/v1/master/"
-            f"{DIRECT_HLS_HASH}/production-hls-aes128-rtv-"
-            f"{playback_id}-playout/master.m3u8"
+    payload = {
+        "audio_language": audio_language,
+        "audio_quality": "2.0",
+        "classification_id": CLASSIFICATION_ID,
+        "content_id": content_id,
+        "content_type": "live_channels",
+        "device_serial": "not implemented",
+        "player": "web:HLS-NONE:NONE",
+        "strict_video_quality": False,
+        "subtitle_language": "MIS",
+        "video_type": "stream",
+    }
+
+    try:
+        response = get_session().post(
+            f"{API_BASE}/avod/streamings",
+            params=params,
+            json=payload,
+            headers=api_headers(),
+            timeout=TIMEOUT,
         )
 
-        response = None
-        try:
-            response = requests.get(
-                url,
-                headers=headers,
-                timeout=TIMEOUT,
-                stream=True,
-                allow_redirects=True,
-            )
-            sample = next(response.iter_content(chunk_size=2048), b"")
-
-            if response.status_code == 200 and b"#EXTM3U" in sample:
-                log.info(
-                    "HLS directo válido: %s | id=%s | numerical_id=%s | slug=%s",
-                    title,
-                    content_id,
-                    playback_id,
-                    slug,
-                )
-                return content_id, response.url.split("?", 1)[0]
-
-            log.debug(
-                "HLS no válido para %s con slug %s: HTTP %s, tipo=%s",
+        if response.status_code != 200:
+            log.warning(
+                "Rakuten no ha entregado el stream de %s: HTTP %s | %s",
                 title,
-                slug,
                 response.status_code,
-                response.headers.get("Content-Type", "desconocido"),
+                response.text[:500].replace("\\n", " "),
             )
-        except requests.RequestException as error:
-            log.debug("Error probando HLS de %s (%s): %s", title, slug, error)
-        finally:
-            if response is not None:
-                response.close()
+            return content_id, None
 
-    log.warning(
-        "No se encontró HLS para %s (numerical_id=%s). Slugs probados: %s",
-        title,
-        playback_id,
-        ", ".join(slugs),
-    )
-    return content_id, None
+        data = response.json().get("data") or {}
+        stream_infos = data.get("stream_infos") or []
 
+        # Se elige una URL HLS entregada por Rakuten; no se inventa ninguna.
+        for stream_info in stream_infos:
+            if not isinstance(stream_info, dict):
+                continue
+            url = stream_info.get("url") or stream_info.get("stream_url")
+            if not isinstance(url, str) or not url.startswith("https://"):
+                continue
+            if ".m3u8" not in url.lower():
+                continue
+
+            log.info("URL HLS oficial obtenida: %s", title)
+            return content_id, url
+
+        log.warning(
+            "Rakuten respondió correctamente pero no incluyó URL HLS para %s.",
+            title,
+        )
+        return content_id, None
+
+    except requests.RequestException as error:
+        log.warning("Error solicitando el stream de %s: %s", title, error)
+        return content_id, None
+    except (ValueError, TypeError, KeyError) as error:
+        log.warning("Respuesta inesperada de Rakuten para %s: %s", title, error)
+        return content_id, None
 
 
 # ============================================================
@@ -629,10 +596,7 @@ def build_extinf(channel, category, epg_mapping):
 
     logo = clean_text(find_logo(channel))
 
-    epg_id = match_epg_id(
-        channel,
-        epg_mapping
-    )
+    epg_id = match_epg_id(channel, epg_mapping) or channel_id
 
     attributes = [
         f'tvg-id="{clean_text(epg_id)}"',
@@ -686,7 +650,7 @@ def generate_playlist(
         if not category:
             category = "Otros"
 
-        if match_epg_id(channel, epg_mapping) != channel_id:
+        if match_epg_id(channel, epg_mapping):
             epg_matches += 1
 
         extinf = build_extinf(
