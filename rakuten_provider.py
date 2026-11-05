@@ -5,6 +5,7 @@ import re
 import time
 import threading
 import unicodedata
+import uuid
 import xml.etree.ElementTree as ET
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -141,6 +142,7 @@ def create_session():
     session = requests.Session()
     session.headers.update({
         "User-Agent": USER_AGENT,
+        "Accept": "application/json, text/plain, */*",
         "Origin": ORIGIN,
         "Referer": REFERER,
     })
@@ -152,6 +154,49 @@ def get_session():
     if _session is None:
         _session = create_session()
     return _session
+
+def initialize_device():
+    """Registra el dispositivo web en Rakuten antes de solicitar streams."""
+    log.info("Inicializando dispositivo web en Rakuten...")
+    device_uid = str(uuid.uuid4())
+    data = {
+        "device_identifier": "web",
+        "ifa_id": "",
+        "device_metadata": {
+            "app_version": "v5.5.22",
+            "audio_quality": "2.0",
+            "brand": "chrome",
+            "firmware": "XX.XX.XX",
+            "hdr": False,
+            "model": "GENERIC",
+            "os": "Windows",
+            "sdk": "130.0.0",
+            "serial_number": "not implemented",
+            "trusted_uid": False,
+            "uid": device_uid,
+            "video_quality": "FHD",
+            "year": 1970,
+        },
+    }
+    response = get_session().post(
+        API_BASE + "/me/start",
+        params={"device_identifier": "web"},
+        headers=api_headers(),
+        json=data,
+        timeout=TIMEOUT,
+    )
+    if response.status_code != 200:
+        log.error("Error inicializando dispositivo: HTTP %s - %s", response.status_code, response.text[:2000])
+        response.raise_for_status()
+    payload = response.json()
+    market = payload.get("data", {}).get("market", {})
+    profile = payload.get("data", {}).get("user", {}).get("profile", {})
+    classification = profile.get("classification", {}).get("id")
+    log.info("Dispositivo inicializado. Mercado=%s, clasificación=%s", market.get("code", "desconocido"), classification if classification is not None else "no disponible")
+    if market.get("code") and str(market.get("code")).lower() != COUNTRY:
+        log.warning("Rakuten detecta mercado %s; el generador está configurado para %s.", market.get("code"), COUNTRY)
+    return payload
+
 
 
 # ============================================================
@@ -749,8 +794,9 @@ def main():
     log.info("       GENERADOR RAKUTEN TV ESPAÑA")
     log.info("========================================")
 
-    # Mantener una única sesión HTTP, igual que OpenCockpit.
-    # Consultar secuencialmente conserva cookies/estado antes de pedir streams.
+    # Registrar el dispositivo web antes de solicitar streams.
+    # Se conserva la misma sesión para mantener cookies/estado de Rakuten.
+    initialize_device()
     channels = get_live_channels()
     categories = get_categories()
     epg_mapping = get_epg_mapping()
