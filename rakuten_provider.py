@@ -55,6 +55,9 @@ log = logging.getLogger("rakuten-provider")
 
 _thread_local = threading.local()
 
+_stream_debug_lock = threading.Lock()
+_stream_debug_logged = False
+
 
 # ============================================================
 # CATEGORÍAS
@@ -537,6 +540,33 @@ def get_channel_stream(channel):
         )
 
     except Exception as error:
+        global _stream_debug_logged
+
+        # Registrar el cuerpo y los parámetros de la primera respuesta fallida.
+        # Así evitamos llenar el log con 127 errores idénticos.
+        with _stream_debug_lock:
+            if not _stream_debug_logged:
+                _stream_debug_logged = True
+                log.error(
+                    "DIAGNÓSTICO RAKUTEN: HTTP %s para canal %s (%s)",
+                    getattr(response, "status_code", "sin respuesta"),
+                    channel_id,
+                    channel.get("title", channel_id),
+                )
+                if "response" in locals():
+                    log.error(
+                        "DIAGNÓSTICO RAKUTEN: cuerpo de respuesta: %s",
+                        response.text[:5000],
+                    )
+                log.error(
+                    "DIAGNÓSTICO RAKUTEN: parámetros enviados: %s",
+                    params,
+                )
+                log.error(
+                    "DIAGNÓSTICO RAKUTEN: JSON enviado: %s",
+                    data,
+                )
+
         log.warning(
             "Error obteniendo stream de %s: %s",
             channel.get("title", channel_id),
