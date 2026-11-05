@@ -39,10 +39,6 @@ jobs:
           pip install requests
 
       - name: Generar lista Rakuten España
-        env:
-          # Configurar en Settings > Secrets and variables > Actions:
-          # RAKUTEN_PROXY = URL de un proxy/VPN con salida pública en España.
-          RAKUTEN_PROXY: ${{ secrets.RAKUTEN_PROXY }}
         run: |
           python rakuten_provider.py
 
