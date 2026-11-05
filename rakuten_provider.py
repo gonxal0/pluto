@@ -511,7 +511,7 @@ def get_channel_stream(channel):
         "device_stream_hdr_type": "NONE",
         "device_stream_video_quality": "FHD",
         # La API de referencia envía el booleano como literal minúsculo.
-        "disable_dash_legacy_packages": False,
+        "disable_dash_legacy_packages": "false",
     })
 
     for audio_language in languages:
