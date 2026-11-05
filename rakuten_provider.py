@@ -30,8 +30,8 @@ EPG_URL = (
     "ElTirillas/RakutenTV/main/Rakuten_ES_epg.xml"
 )
 
-ORIGIN = "https://www.rakuten.tv"
-REFERER = "https://www.rakuten.tv/"
+ORIGIN = "https://rakuten.tv"
+REFERER = "https://rakuten.tv/"
 
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) "
@@ -511,7 +511,7 @@ def get_channel_stream(channel):
         "device_stream_hdr_type": "NONE",
         "device_stream_video_quality": "FHD",
         # La API de referencia envía el booleano como literal minúsculo.
-        "disable_dash_legacy_packages": "false",
+        "disable_dash_legacy_packages": False,
     })
 
     for audio_language in languages:
