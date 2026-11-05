@@ -5,7 +5,6 @@ import re
 import time
 import threading
 import unicodedata
-import uuid
 import xml.etree.ElementTree as ET
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -154,49 +153,6 @@ def get_session():
     if _session is None:
         _session = create_session()
     return _session
-
-def initialize_device():
-    """Registra el dispositivo web en Rakuten antes de solicitar streams."""
-    log.info("Inicializando dispositivo web en Rakuten...")
-    device_uid = str(uuid.uuid4())
-    data = {
-        "device_identifier": "web",
-        "ifa_id": "",
-        "device_metadata": {
-            "app_version": "v5.5.22",
-            "audio_quality": "2.0",
-            "brand": "chrome",
-            "firmware": "XX.XX.XX",
-            "hdr": False,
-            "model": "GENERIC",
-            "os": "Windows",
-            "sdk": "130.0.0",
-            "serial_number": "not implemented",
-            "trusted_uid": False,
-            "uid": device_uid,
-            "video_quality": "FHD",
-            "year": 1970,
-        },
-    }
-    response = get_session().post(
-        API_BASE + "/me/start",
-        params={"device_identifier": "web"},
-        headers=api_headers(),
-        json=data,
-        timeout=TIMEOUT,
-    )
-    if response.status_code != 200:
-        log.error("Error inicializando dispositivo: HTTP %s - %s", response.status_code, response.text[:2000])
-        response.raise_for_status()
-    payload = response.json()
-    market = payload.get("data", {}).get("market", {})
-    profile = payload.get("data", {}).get("user", {}).get("profile", {})
-    classification = profile.get("classification", {}).get("id")
-    log.info("Dispositivo inicializado. Mercado=%s, clasificación=%s", market.get("code", "desconocido"), classification if classification is not None else "no disponible")
-    if market.get("code") and str(market.get("code")).lower() != COUNTRY:
-        log.warning("Rakuten detecta mercado %s; el generador está configurado para %s.", market.get("code"), COUNTRY)
-    return payload
-
 
 
 # ============================================================
@@ -500,111 +456,90 @@ def find_logo(channel):
 
 def get_channel_stream(channel):
     channel_id = channel.get("id")
+    labels = channel.get("labels") or {}
+    channel_languages = labels.get("languages") or []
 
-    languages = (
-        channel.get("labels", {})
-        .get("languages", [])
-    )
+    # Rakuten valida audio_language contra los idiomas del canal.
+    # Probar primero los idiomas anunciados y después el idioma de España
+    # y ENG, igual que la implementación pública de referencia.
+    languages = []
+    for item in channel_languages:
+        if isinstance(item, dict):
+            language = item.get("id")
+            if language and language not in languages:
+                languages.append(language)
+    for language in ("SPA", "ENG"):
+        if language not in languages:
+            languages.append(language)
 
-    # Rakuten espera un idioma de audio real; MIS se reserva para subtítulos.
-    audio_language = "SPA"
-
-    if languages:
-        first_language = languages[0]
-
-        if isinstance(first_language, dict):
-            audio_language = first_language.get("id", "SPA")
-
-    # Mantener la petición igual que la implementación pública de referencia
-    # de Rakuten: no añadir identificadores de dispositivo ni campos opcionales.
-    # El endpoint /avod/streamings puede fallar internamente si recibe metadatos
-    # de dispositivo que no reconoce.
     params = api_params()
     params.update({
         "device_stream_audio_quality": "2.0",
         "device_stream_hdr_type": "NONE",
         "device_stream_video_quality": "FHD",
-        "disable_dash_legacy_packages": False,
+        # La API de referencia envía el booleano como literal minúsculo.
+        "disable_dash_legacy_packages": "false",
     })
 
-    data = {
-        "audio_language": audio_language,
-        "audio_quality": "2.0",
-        "classification_id": CLASSIFICATION_ID,
-        "content_id": channel_id,
-        "content_type": "live_channels",
-        "device_serial": "not implemented",
-        "player": "web:HLS-NONE:NONE",
-        "strict_video_quality": False,
-        "subtitle_language": "MIS",
-        "video_type": "stream",
-    }
+    for audio_language in languages:
+        data = {
+            "audio_language": audio_language,
+            "audio_quality": "2.0",
+            "classification_id": int(CLASSIFICATION_ID),
+            "content_id": channel_id,
+            "content_type": "live_channels",
+            "device_serial": "not implemented",
+            "player": "web:HLS-NONE:NONE",
+            "strict_video_quality": False,
+            "subtitle_language": "MIS",
+            "video_type": "stream",
+        }
+        try:
+            response = get_session().post(
+                f"{API_BASE}/avod/streamings",
+                params=params,
+                headers=api_headers(),
+                json=data,
+                timeout=TIMEOUT,
+            )
+            if response.status_code >= 400:
+                # Guardar el primer diagnóstico, pero continuar si Rakuten
+                # rechaza únicamente el idioma de audio probado.
+                payload = None
+                try:
+                    payload = response.json()
+                except Exception:
+                    pass
+                error_text = response.text[:1000]
+                if response.status_code == 422 and payload:
+                    errors = payload.get("errors") or []
+                    error_code = str(errors[0].get("code") or "") if errors else ""
+                    error_message = str(errors[0].get("message") or "") if errors else ""
+                    if "language" in error_code.lower() or "language" in error_message.lower():
+                        log.debug("Idioma %s no aceptado para %s; probando siguiente.", audio_language, channel_id)
+                        continue
+                global _stream_debug_logged
+                with _stream_debug_lock:
+                    if not _stream_debug_logged:
+                        _stream_debug_logged = True
+                        log.error("DIAGNÓSTICO RAKUTEN: HTTP %s para canal %s (%s)", response.status_code, channel_id, channel.get("title", channel_id))
+                        log.error("DIAGNÓSTICO RAKUTEN: cuerpo de respuesta: %s", error_text)
+                        log.error("DIAGNÓSTICO RAKUTEN: idioma=%s parámetros=%s JSON=%s", audio_language, params, data)
+                response.raise_for_status()
+            payload = response.json()
+            stream_infos = (payload.get("data") or {}).get("stream_infos") or []
+            for stream in stream_infos:
+                url = stream.get("url")
+                if url and ".m3u8" in url:
+                    return channel_id, url
+            # Respuesta válida sin stream: probar siguiente idioma.
+        except requests.HTTPError:
+            raise
+        except Exception as error:
+            log.warning("Error obteniendo stream de %s (%s): %s", channel.get("title", channel_id), audio_language, error)
 
-    try:
-        response = get_session().post(
-            f"{API_BASE}/avod/streamings",
-            params=params,
-            headers=api_headers(),
-            json=data,
-            timeout=TIMEOUT,
-        )
-
-        response.raise_for_status()
-
-        payload = response.json()
-
-        stream_infos = (
-            payload.get("data", {})
-            .get("stream_infos", [])
-        )
-
-        for stream in stream_infos:
-            url = stream.get("url")
-
-            if url and ".m3u8" in url:
-                return channel_id, url
-
-        log.warning(
-            "Sin URL HLS: %s",
-            channel.get("title", channel_id)
-        )
-
-    except Exception as error:
-        global _stream_debug_logged
-
-        # Registrar el cuerpo y los parámetros de la primera respuesta fallida.
-        # Así evitamos llenar el log con 127 errores idénticos.
-        with _stream_debug_lock:
-            if not _stream_debug_logged:
-                _stream_debug_logged = True
-                log.error(
-                    "DIAGNÓSTICO RAKUTEN: HTTP %s para canal %s (%s)",
-                    getattr(locals().get("response"), "status_code", "sin respuesta"),
-                    channel_id,
-                    channel.get("title", channel_id),
-                )
-                if locals().get("response") is not None:
-                    log.error(
-                        "DIAGNÓSTICO RAKUTEN: cuerpo de respuesta: %s",
-                        locals()["response"].text[:5000],
-                    )
-                log.error(
-                    "DIAGNÓSTICO RAKUTEN: parámetros enviados: %s",
-                    params,
-                )
-                log.error(
-                    "DIAGNÓSTICO RAKUTEN: JSON enviado: %s",
-                    data,
-                )
-
-        log.warning(
-            "Error obteniendo stream de %s: %s",
-            channel.get("title", channel_id),
-            error
-        )
-
+    log.warning("No se obtuvo stream para %s tras probar idiomas: %s", channel.get("title", channel_id), ", ".join(languages))
     return channel_id, None
-
 
 # ============================================================
 # GENERAR LISTA
@@ -794,9 +729,9 @@ def main():
     log.info("       GENERADOR RAKUTEN TV ESPAÑA")
     log.info("========================================")
 
-    # Registrar el dispositivo web antes de solicitar streams.
-    # Se conserva la misma sesión para mantener cookies/estado de Rakuten.
-    initialize_device()
+    # Mercado español fijado manualmente (es / clasificación 5).
+    # No usar /me/start: detecta el país por IP y bloquea los runners
+    # de GitHub Actions que salen por una IP no española.
     channels = get_live_channels()
     categories = get_categories()
     epg_mapping = get_epg_mapping()
