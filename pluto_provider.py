@@ -1,29 +1,60 @@
 
-import os
+import gzip
+import html
 import uuid
 import requests
-from html import escape
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
-REGION = "es"
 OUTPUT = "pluto_es.m3u"
-EPG = "https://github.com/matthuisman/i.mjh.nz/raw/master/PlutoTV/es.xml.gz"
+EPG = "https://github.com/matthuisman/i.mjh.nz/raw/refs/heads/master/PlutoTV/es.xml.gz"
 
-BASE_HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36",
+CATALOG = "https://github.com/matthuisman/i.mjh.nz/raw/refs/heads/master/PlutoTV/.channels.json.gz"
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/133.0.0.0 Safari/537.36",
     "Origin": "https://pluto.tv",
     "Referer": "https://pluto.tv/",
-    "Accept": "*/*",
-    "Accept-Language": "es-ES,es;q=0.9"
+    "X-Forwarded-For": "88.26.241.248"
 }
 
-# Se conserva la configuración regional de tu código original.
-BASE_HEADERS["X-Forwarded-For"] = "88.26.241.248"
+s = requests.Session()
+s.headers.update(HEADERS)
 
-session = requests.Session()
-session.headers.update(BASE_HEADERS)
+retry = Retry(
+    total=3,
+    backoff_factor=1,
+    status_forcelist=[429, 500, 502, 503, 504],
+    allowed_methods=["GET"]
+)
+s.mount("https://", HTTPAdapter(max_retries=retry))
 
 
-def get_token():
+def get_json(url, **kwargs):
+    r = s.get(url, timeout=25, **kwargs)
+    r.raise_for_status()
+    return r.json()
+
+
+def get_catalog():
+    print("Descargando catálogo de reproducción...")
+    r = s.get(CATALOG, timeout=30)
+    r.raise_for_status()
+
+    data = gzip.decompress(r.content)
+    catalog = __import__("json").loads(data)
+
+    channels = catalog.get("regions", {}).get("es", {}).get("channels", {})
+
+    if not channels:
+        raise RuntimeError("No se encuentra el catálogo español")
+
+    return channels
+
+
+def get_pluto_data():
+    print("Obteniendo sesión de Pluto...")
+
     params = {
         "appName": "web",
         "appVersion": "8.1.0",
@@ -39,123 +70,111 @@ def get_token():
         "drmCapabilities": "widevine:L3"
     }
 
-    response = session.get(
-        "https://boot.pluto.tv/v4/start",
-        params=params,
-        timeout=30
-    )
-    response.raise_for_status()
+    start = get_json("https://boot.pluto.tv/v4/start", params=params)
+    token = start.get("sessionToken")
 
-    token = response.json().get("sessionToken")
     if not token:
-        raise RuntimeError("Pluto no ha devuelto un token")
+        raise RuntimeError("No se recibió el token de Pluto")
 
-    return token
-
-
-def get_channels(token):
     headers = {"Authorization": f"Bearer {token}"}
 
-    response = session.get(
+    print("Descargando canales y categorías españolas...")
+
+    channels = get_json(
         "https://service-channels.clusters.pluto.tv/v2/guide/channels",
         params={"limit": 1000},
-        headers=headers,
-        timeout=30
-    )
-    response.raise_for_status()
+        headers=headers
+    ).get("data", [])
 
-    channels = response.json().get("data", [])
-    if not channels:
-        raise RuntimeError("No se han recibido canales de Pluto")
-
-    return channels, headers
-
-
-def get_categories(headers):
-    response = session.get(
+    categories = get_json(
         "https://service-channels.clusters.pluto.tv/v2/guide/categories",
-        headers=headers,
-        timeout=30
-    )
-    response.raise_for_status()
+        headers=headers
+    ).get("data", [])
 
-    categories = {}
-    for category in response.json().get("data", []):
-        name = category.get("name", "Pluto TV")
+    channel_map = {
+        ch["id"]: ch for ch in channels if ch.get("id")
+    }
+
+    category_map = {}
+
+    for category in categories:
         for channel_id in category.get("channelIDs", []):
-            categories[channel_id] = name
+            category_map[channel_id] = category.get("name", "Pluto TV")
 
-    return categories
+    return channel_map, category_map
 
 
-def generate_m3u(channels, categories):
+def generate(catalog, live_channels, categories):
     lines = [f'#EXTM3U url-tvg="{EPG}"\n']
-    seen = set()
+    count = 0
 
-    for channel in channels:
-        channel_id = channel.get("id")
-        name = channel.get("name")
+    for channel_id, ch in catalog.items():
 
-        if not channel_id or not name or channel_id in seen:
+        live = live_channels.get(channel_id, {})
+
+        name = live.get("name") or ch.get("name")
+        if not name:
             continue
-
-        seen.add(channel_id)
 
         logo = next(
             (
-                img.get("url", "")
-                for img in channel.get("images", [])
+                img.get("url")
+                for img in live.get("images", [])
                 if img.get("type") == "colorLogoPNG"
             ),
-            ""
+            None
+        ) or ch.get("logo", "")
+
+        group = categories.get(
+            channel_id,
+            ch.get("group", "Pluto TV")
         )
 
-        group = categories.get(channel_id, "Pluto TV")
+        chno = ch.get("chno", "")
 
-        name_attr = escape(str(name), quote=True)
-        logo_attr = escape(str(logo), quote=True)
-        group_attr = escape(str(group), quote=True)
+        # Formato compatible con el generador original.
+        attrs = {
+            "channel-id": channel_id,
+            "tvg-id": channel_id,
+            "tvg-chno": chno,
+            "tvg-name": name,
+            "tvg-logo": logo,
+            "group-title": group
+        }
 
-        lines.append(
-            f'#EXTINF:-1 channel-id="{channel_id}" '
-            f'tvg-id="{channel_id}" '
-            f'tvg-name="{name_attr}" '
-            f'tvg-logo="{logo_attr}" '
-            f'group-title="{group_attr}",{name}\n'
+        metadata = " ".join(
+            f'{key}="{html.escape(str(value), quote=True)}"'
+            for key, value in attrs.items()
         )
 
-        # Mismo sistema de reproducción que el repositorio compatible.
+        display_name = str(name).replace(",", "")
+
+        lines.append(f"#EXTINF:-1 {metadata},{display_name}\n")
         lines.append(f"https://jmp2.uk/plu-{channel_id}.m3u8\n")
 
-    if not seen:
+        count += 1
+
+    if not count:
         raise RuntimeError("No se han generado canales")
 
-    return "".join(lines), len(seen)
+    return "".join(lines), count
 
 
 def main():
-    print("Obteniendo sesión de Pluto España...")
-    token = get_token()
+    catalog = get_catalog()
+    live_channels, categories = get_pluto_data()
 
-    print("Descargando canales...")
-    channels, headers = get_channels(token)
+    content, count = generate(catalog, live_channels, categories)
 
-    print("Obteniendo categorías...")
-    categories = get_categories(headers)
+    with open(OUTPUT + ".tmp", "w", encoding="utf-8") as f:
+        f.write(content)
 
-    print("Generando lista M3U...")
-    content, total = generate_m3u(channels, categories)
+    import os
+    os.replace(OUTPUT + ".tmp", OUTPUT)
 
-    # No sobrescribir una lista válida con una salida vacía.
-    temp_file = OUTPUT + ".tmp"
-    with open(temp_file, "w", encoding="utf-8") as file:
-        file.write(content)
-
-    os.replace(temp_file, OUTPUT)
-
-    print(f"Lista generada: {OUTPUT}")
-    print(f"Canales: {total}")
+    print(f"España: {count} canales generados")
     print(f"Categorías: {len(set(categories.values()))}")
+    print(f"Archivo: {OUTPUT}")
 
 
 if __name__ == "__main__":
