@@ -1,0 +1,76 @@
+
+name: Actualizar Rakuten España
+
+on:
+  schedule:
+    - cron: "43 */4 * * *"
+
+  workflow_dispatch:
+
+  push:
+    paths:
+      - "rakuten_provider.py"
+      - ".github/workflows/rakuten_update.yaml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rakuten-es-update
+  cancel-in-progress: true
+
+jobs:
+  update-rakuten:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Generar lista Rakuten España
+        run: |
+          python rakuten_provider.py
+
+      - name: Validar lista
+        run: |
+          test -s rakuten_es.m3u
+
+          grep -q '^#EXTM3U' rakuten_es.m3u
+          grep -q '^#EXTINF:' rakuten_es.m3u
+          grep -q 'tvg-id=' rakuten_es.m3u
+          grep -q 'group-title=' rakuten_es.m3u
+          grep -q 'rakuten' rakuten_es.m3u
+
+          CHANNELS=$(grep -c '^#EXTINF:' rakuten_es.m3u)
+
+          echo "Canales generados: $CHANNELS"
+
+          if [ "$CHANNELS" -lt 1 ]; then
+            echo "No se han generado canales."
+            exit 1
+          fi
+
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add rakuten_es.m3u
+
+          if git diff --cached --quiet; then
+            echo "La lista no ha cambiado."
+          else
+            git commit -m "Actualizar Rakuten TV España"
+            git push
+          fi
