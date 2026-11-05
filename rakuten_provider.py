@@ -243,38 +243,81 @@ def api_headers():
 def get_live_channels():
     log.info("Consultando canales de Rakuten España...")
 
-    params = {
-        "classification_id": 5,
-        "device_identifier": "web",
-        "locale": "es",
-        "market_code": "es",
-        "page": 1,
-        "per_page": 100,
-    }
+    channels = []
+    seen_ids = set()
 
-    response = get_session().get(
-        f"{API_BASE}/live_channels",
-        params=params,
-        headers=api_headers(),
-        timeout=TIMEOUT,
-    )
+    for page in range(1, MAX_PAGES + 1):
+        params = {
+            "classification_id": CLASSIFICATION_ID,
+            "device_identifier": "web",
+            "locale": LOCALE,
+            "market_code": COUNTRY,
+            "page": page,
+        }
 
-    log.info("URL solicitada: %s", response.url)
-    log.info("HTTP: %s", response.status_code)
-    log.info("Respuesta Rakuten: %s", response.text[:5000])
-
-    response.raise_for_status()
-
-    payload = response.json()
-    channels = payload.get("data", [])
-
-    if not isinstance(channels, list) or not channels:
-        raise RuntimeError(
-            "Rakuten no ha devuelto canales: "
-            + response.text[:2000]
+        response = get_session().get(
+            f"{API_BASE}/live_channels",
+            params=params,
+            headers=api_headers(),
+            timeout=TIMEOUT,
         )
 
-    log.info("Canales recibidos: %s", len(channels))
+        if response.status_code != 200:
+            log.error(
+                "Error consultando página %s: HTTP %s",
+                page,
+                response.status_code,
+            )
+            log.error(
+                "Respuesta Rakuten: %s",
+                response.text[:3000],
+            )
+            response.raise_for_status()
+
+        payload = response.json()
+        page_channels = payload.get("data", [])
+
+        if not isinstance(page_channels, list):
+            raise RuntimeError(
+                f"Formato inesperado en página {page}: "
+                f"{str(payload)[:2000]}"
+            )
+
+        if not page_channels:
+            log.info("No hay más canales en la página %s.", page)
+            break
+
+        new_channels = 0
+
+        for channel in page_channels:
+            channel_id = channel.get("id")
+
+            if not channel_id or channel_id in seen_ids:
+                continue
+
+            seen_ids.add(channel_id)
+            channels.append(channel)
+            new_channels += 1
+
+        log.info(
+            "Página %s: %s canales recibidos, %s nuevos.",
+            page,
+            len(page_channels),
+            new_channels,
+        )
+
+        if new_channels == 0:
+            break
+
+    if not channels:
+        raise RuntimeError(
+            "Rakuten no ha devuelto ningún canal."
+        )
+
+    log.info(
+        "Total de canales únicos recibidos: %s",
+        len(channels),
+    )
 
     return channels
 
