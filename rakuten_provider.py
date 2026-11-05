@@ -5,6 +5,7 @@ import re
 import threading
 import time
 import unicodedata
+import uuid
 import xml.etree.ElementTree as ET
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -235,7 +236,8 @@ def api_headers():
         "Origin": ORIGIN,
         "Referer": REFERER,
         "User-Agent": USER_AGENT,
-        "Accept": "application/json",
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json",
     }
 
 
@@ -481,7 +483,8 @@ def get_channel_stream(channel):
         .get("languages", [])
     )
 
-    audio_language = "MIS"
+    # Rakuten espera un idioma de audio real; MIS se reserva para subtítulos.
+    audio_language = "SPA"
 
     if languages:
         first_language = languages[0]
@@ -504,10 +507,16 @@ def get_channel_stream(channel):
         "content_id": channel_id,
         "content_type": "live_channels",
         "device_serial": "not implemented",
+        "device_uid": str(uuid.uuid4()),
+        "publisher_provided_id": str(uuid.uuid4()),
         "player": "web:HLS-NONE:NONE",
+        "device_make": "chrome",
+        "device_model": "GENERIC",
+        "device_year": 1970,
         "strict_video_quality": False,
-        "subtitle_language": "MIS",
+        "hdr_type": "NONE",
         "video_type": "stream",
+        "subtitle_language": "MIS",
     }
 
     try:
