@@ -30,8 +30,8 @@ EPG_URL = (
     "ElTirillas/RakutenTV/main/Rakuten_ES_epg.xml"
 )
 
-ORIGIN = "https://rakuten.tv"
-REFERER = "https://rakuten.tv/"
+ORIGIN = "https://www.rakuten.tv"
+REFERER = "https://www.rakuten.tv/"
 
 USER_AGENT = (
     "Mozilla/5.0 (X11; Linux x86_64) "
