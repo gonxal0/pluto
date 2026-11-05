@@ -47,23 +47,17 @@ jobs:
           set -e
 
           test -s pluto_es.m3u
-
           grep -q '^#EXTM3U' pluto_es.m3u
           grep -q '^#EXTINF' pluto_es.m3u
           grep -q 'master.m3u8?jwt=' pluto_es.m3u
 
           if grep -q 'jmp2.uk' pluto_es.m3u; then
-            echo "ERROR: Se han encontrado URLs jmp2.uk"
+            echo "ERROR: Se han encontrado URLs antiguas jmp2.uk"
             exit 1
           fi
 
-          echo "Playlist validada correctamente"
-
-          echo "Canales generados:"
-          grep -c '^#EXTINF' pluto_es.m3u
-
-          echo "URLs directas:"
-          grep -c 'master.m3u8?jwt=' pluto_es.m3u
+          echo "Playlist directa validada"
+          echo "Canales: $(grep -c '^#EXTINF' pluto_es.m3u)"
 
       - name: Commit changes
         run: |
