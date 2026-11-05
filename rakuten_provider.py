@@ -549,14 +549,14 @@ def get_channel_stream(channel):
                 _stream_debug_logged = True
                 log.error(
                     "DIAGNÓSTICO RAKUTEN: HTTP %s para canal %s (%s)",
-                    getattr(response, "status_code", "sin respuesta"),
+                    getattr(locals().get("response"), "status_code", "sin respuesta"),
                     channel_id,
                     channel.get("title", channel_id),
                 )
-                if "response" in locals():
+                if locals().get("response") is not None:
                     log.error(
                         "DIAGNÓSTICO RAKUTEN: cuerpo de respuesta: %s",
-                        response.text[:5000],
+                        locals()["response"].text[:5000],
                     )
                 log.error(
                     "DIAGNÓSTICO RAKUTEN: parámetros enviados: %s",
