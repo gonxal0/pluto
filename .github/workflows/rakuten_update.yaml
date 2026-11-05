@@ -39,6 +39,10 @@ jobs:
           pip install requests
 
       - name: Generar lista Rakuten España
+        env:
+          # Configurar en Settings > Secrets and variables > Actions:
+          # RAKUTEN_CLIENT_IP = IP pública española de la conexión del usuario.
+          RAKUTEN_CLIENT_IP: ${{ secrets.RAKUTEN_CLIENT_IP }}
         run: |
           python rakuten_provider.py
 
