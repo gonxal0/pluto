@@ -50,7 +50,7 @@ logging.basicConfig(
 
 log = logging.getLogger("rakuten-provider")
 
-_session = requests.Session()
+_session = None
 
 _stream_debug_lock = threading.Lock()
 _stream_debug_logged = False
@@ -147,6 +147,9 @@ def create_session():
 
 
 def get_session():
+    global _session
+    if _session is None:
+        _session = create_session()
     return _session
 
 
