@@ -477,12 +477,16 @@ def get_channel_stream(channel):
         if isinstance(first_language, dict):
             audio_language = first_language.get("id", "SPA")
 
+    # Mantener la petición igual que la implementación pública de referencia
+    # de Rakuten: no añadir identificadores de dispositivo ni campos opcionales.
+    # El endpoint /avod/streamings puede fallar internamente si recibe metadatos
+    # de dispositivo que no reconoce.
     params = api_params()
     params.update({
         "device_stream_audio_quality": "2.0",
         "device_stream_hdr_type": "NONE",
         "device_stream_video_quality": "FHD",
-        "disable_dash_legacy_packages": "false",
+        "disable_dash_legacy_packages": False,
     })
 
     data = {
@@ -492,16 +496,10 @@ def get_channel_stream(channel):
         "content_id": channel_id,
         "content_type": "live_channels",
         "device_serial": "not implemented",
-        "device_uid": str(uuid.uuid4()),
-        "publisher_provided_id": str(uuid.uuid4()),
         "player": "web:HLS-NONE:NONE",
-        "device_make": "chrome",
-        "device_model": "GENERIC",
-        "device_year": 1970,
         "strict_video_quality": False,
-        "hdr_type": "NONE",
-        "video_type": "stream",
         "subtitle_language": "MIS",
+        "video_type": "stream",
     }
 
     try:
