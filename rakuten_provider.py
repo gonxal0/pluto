@@ -489,7 +489,7 @@ def get_channel_stream(channel):
         "classification_id": CLASSIFICATION_ID,
         "content_id": channel_id,
         "content_type": "live_channels",
-        "device_serial": "not implemented",
+        "device_serial": "enigma2",
         "player": "web:HLS-NONE:NONE",
         "strict_video_quality": False,
         "subtitle_language": "MIS",
