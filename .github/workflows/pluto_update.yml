@@ -1,8 +1,9 @@
+
 name: Update Pluto Spain
 
 on:
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '17 */4 * * *'
   workflow_dispatch:
   push:
     branches:
@@ -27,7 +28,7 @@ jobs:
         uses: actions/checkout@v5
 
       - name: Setup Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -35,24 +36,24 @@ jobs:
         run: pip install requests
 
       - name: Generate Spain playlist
-        env:
-          PLUTO_REGION: es
         run: python pluto_provider.py
 
       - name: Validate playlist
         run: |
           test -s pluto_es.m3u
           grep -q '^#EXTINF' pluto_es.m3u
-          echo "Spain playlist generated successfully"
+          grep -q 'https://jmp2.uk/plu-' pluto_es.m3u
 
-      - name: Publish changes
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add pluto_es.m3u
+
           if ! git diff --cached --quiet; then
-            git commit -m "Update Pluto Spain playlist"
+            git commit -m "Update Pluto Spain"
             git push
           else
-            echo "No changes detected"
+            echo "No changes"
           fi
