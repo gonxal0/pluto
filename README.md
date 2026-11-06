@@ -24,8 +24,13 @@ Automatically updated M3U playlists for Pluto TV with forced HD resolution and c
 | **🇳🇴 Norway** | `https://raw.githubusercontent.com/BuddyChewChew/pluto/refs/heads/main/main/pluto_no.m3u` |
 | **🇸🇪 Sweden** | `https://raw.githubusercontent.com/BuddyChewChew/pluto/refs/heads/main/pluto_se.m3u` |
 | **🇩🇰 Denmark** | `https://raw.githubusercontent.com/BuddyChewChew/pluto/refs/heads/main/pluto_dk.m3u` |
+| **📺 Xiaomi TV+** | `https://raw.githubusercontent.com/gonxal0/pluto/refs/heads/main/xiaomi.m3u` |
 
 ---
+
+## 📺 Xiaomi TV+ Playlist
+
+The workflow mirrors [Apsattv's community-maintained Xiaomi M3U](https://www.apsattv.com/xiaomi.m3u) every six hours. Apsattv's [source page](https://apsattv.com/streams.html) marks the Xiaomi list as needing attention and last updated it on 20 March 2025, so this mirror may contain stale or unavailable streams. Xiaomi's APK uses internal service routes, but the API did not return a channel catalog without app-specific request data. Stream URLs are preserved as published and may be geo-restricted; this repository does not provide an EPG for Xiaomi TV+.
 
 ## 📅 XML TV Guide (EPG)
 
