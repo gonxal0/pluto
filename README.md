@@ -30,7 +30,7 @@ Automatically updated M3U playlists for Pluto TV with forced HD resolution and c
 
 ## 📺 Xiaomi TV+ Playlist
 
-The workflow mirrors [Apsattv's community-maintained Xiaomi M3U](https://www.apsattv.com/xiaomi.m3u) every six hours. Apsattv's [source page](https://apsattv.com/streams.html) marks the Xiaomi list as needing attention and last updated it on 20 March 2025, so this mirror may contain stale or unavailable streams. Xiaomi's APK uses internal service routes, but the API did not return a channel catalog without app-specific request data. Stream URLs are preserved as published and may be geo-restricted; this repository does not provide an EPG for Xiaomi TV+.
+The workflow now reads the Xiaomi TV+ guide API used by the Android app, signs the request using the parameters found in the APK, and filters channels to Spain (`ES`, `Global` and `ALL`). It keeps Xiaomi's guide sections and playback URLs, filling the URL templates returned by the app. The current guide has the sections **Para ti**, **Nuevo en Xiaomi TV+**, **Música**, **Cine**, **Estilo de vida**, **Deportes y aire libre** and **Entretenimiento**; Xiaomi's current response does not expose separate News or Documentary sections. The same channel appears in multiple groups when the app lists it in multiple sections. Provider playback and regional restrictions still apply; this repository does not provide an EPG for Xiaomi TV+.
 
 ## 📅 XML TV Guide (EPG)
 
