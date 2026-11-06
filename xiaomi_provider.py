@@ -18,7 +18,7 @@ from urllib.request import Request, urlopen
 
 SOURCE_URL = "https://www.apsattv.com/xiaomi.m3u"
 OUTPUT = Path(__file__).with_name("xiaomi.m3u")
-USER_AGENT = "Mozilla/5.0 (compatible; PlutoPlaylistUpdater/1.0)"
+USER_AGENT = "Mozilla/5.0 (compatible; XiaomiPlaylistUpdater/1.0)"
 
 
 def fetch_playlist() -> str:
