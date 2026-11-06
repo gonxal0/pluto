@@ -121,12 +121,12 @@ def get_catalog():
     return channels
 
 
-def get_pluto_session():
+def get_pluto_session(server_side_ads=False):
     """
-    Obtiene un JWT nuevo y los datos de reproducción proporcionados
-    por Pluto: servidor stitcher y stitcherParams.
+    Obtiene una sesión Pluto para comparar las dos configuraciones de anuncios.
     """
-    print("Solicitando sesión nueva a Pluto...")
+    ads_value = "true" if server_side_ads else "false"
+    print(f"Solicitando sesión nueva a Pluto (serverSideAds={ads_value})...")
 
     params = {
         "appName": "web",
@@ -137,7 +137,7 @@ def get_pluto_session():
         "deviceType": "web",
         "clientID": str(uuid.uuid4()),
         "clientModelNumber": "1.0.0",
-        "serverSideAds": "false",
+        "serverSideAds": ads_value,
         "architecture": "x86_64",
         "buildVersion": "1.0.0",
         "drmCapabilities": "widevine:L3",
@@ -231,7 +231,7 @@ def get_pluto_data(token):
     return channel_map, category_map
 
 
-def build_stream_url(channel_id, pluto_session):
+def build_stream_url(channel_id, pluto_session, include_extended_events=False):
     """
     Construye la URL HLS directa de Pluto.
 
@@ -275,6 +275,9 @@ def build_stream_url(channel_id, pluto_session):
     ]
 
     query_params.extend(extra_params)
+
+    if include_extended_events:
+        query_params.append(("includeExtendedEvents", "true"))
 
     return f"{url}?{urlencode(query_params)}"
 
@@ -400,12 +403,13 @@ def generate(catalog, live_channels, categories, pluto_session):
     return "".join(lines), count
 
 
-def diagnose_music_streams(catalog, live_channels, categories, pluto_session):
-    """
-    Solicita el manifiesto HLS real de cada canal musical y muestra
-    el estado HTTP y el cuerpo de error (si existe), sin imprimir el JWT.
-    """
-    print("\\nComprobando manifiestos HLS de los canales de música...")
+def diagnose_music_streams(catalog, live_channels, categories, pluto_session,
+                           session_label, include_extended_events=False):
+    """Compara respuestas HLS de canales musicales con variantes de sesión."""
+    print(
+        f"\\n[TEST] {session_label} "
+        f"includeExtendedEvents={str(include_extended_events).lower()}"
+    )
 
     probe_session = requests.Session()
     probe_session.headers.update(HEADERS)
@@ -422,13 +426,7 @@ def diagnose_music_streams(catalog, live_channels, categories, pluto_session):
             or live_channels.get(catalog_original_id)
             or {}
         )
-
-        stream_id = (
-            live.get("id")
-            or catalog_original_id
-            or catalog_id
-        )
-
+        stream_id = live.get("id") or catalog_original_id or catalog_id
         name = live.get("name") or channel.get("name") or ""
         group = (
             categories.get(stream_id)
@@ -436,7 +434,6 @@ def diagnose_music_streams(catalog, live_channels, categories, pluto_session):
             or channel.get("group")
             or ""
         )
-
         is_music = (
             str(group).strip().lower() in ("música", "musica", "music")
             or "music" in str(name).lower()
@@ -447,38 +444,36 @@ def diagnose_music_streams(catalog, live_channels, categories, pluto_session):
             continue
 
         checked.add(stream_id)
-        url = build_stream_url(stream_id, pluto_session)
+        url = build_stream_url(
+            stream_id, pluto_session,
+            include_extended_events=include_extended_events,
+        )
 
         try:
             response = probe_session.get(
-                url,
-                timeout=(10, 20),
-                stream=True,
-                allow_redirects=True,
+                url, timeout=(10, 20), stream=True, allow_redirects=True,
             )
-
             body = ""
             try:
-                first_chunk = next(response.iter_content(chunk_size=2048), b"")
+                first_chunk = next(response.iter_content(chunk_size=1024), b"")
                 body = first_chunk.decode("utf-8", errors="replace")
             except Exception as exc:
-                body = f"<error leyendo respuesta: {exc}>"
+                body = f"<error leyendo respuesta: {type(exc).__name__}>"
 
-            # Evitamos mostrar tokens o URLs firmadas en los registros.
-            body = body[:700].replace("\\n", " ").replace("\\r", " ")
+            # No imprimir URLs firmadas, JWT ni parámetros de sesión.
+            body = body[:300].replace("\\n", " ").replace("\\r", " ")
             print(
-                f"[MUSIC HTTP] name={name} id={stream_id} "
-                f"status={response.status_code} "
+                f"[MUSIC TEST] variant={session_label} "
+                f"extended={str(include_extended_events).lower()} "
+                f"name={name} id={stream_id} status={response.status_code} "
                 f"content_type={response.headers.get('Content-Type', '')} "
-                f"server={response.headers.get('Server', '')} "
                 f"body={body!r}"
             )
             response.close()
-
         except requests.RequestException as exc:
             print(
-                f"[MUSIC HTTP] name={name} id={stream_id} "
-                f"request_error={type(exc).__name__}: {exc}"
+                f"[MUSIC TEST] variant={session_label} name={name} "
+                f"id={stream_id} request_error={type(exc).__name__}: {exc}"
             )
 
     probe_session.close()
@@ -526,11 +521,26 @@ def main():
 
     validate_playlist(content, count)
 
+    # Variante A: sesión original, sin includeExtendedEvents.
     diagnose_music_streams(
-        catalog,
-        live_channels,
-        categories,
-        pluto_session,
+        catalog, live_channels, categories, pluto_session,
+        session_label="ads_false_baseline",
+        include_extended_events=False,
+    )
+
+    # Variante B: misma sesión, con includeExtendedEvents=true.
+    diagnose_music_streams(
+        catalog, live_channels, categories, pluto_session,
+        session_label="ads_false_extended",
+        include_extended_events=True,
+    )
+
+    # Variante C: sesión nueva con serverSideAds=true.
+    ads_session = get_pluto_session(server_side_ads=True)
+    diagnose_music_streams(
+        catalog, live_channels, categories, ads_session,
+        session_label="ads_true_extended",
+        include_extended_events=True,
     )
 
     temp_file = OUTPUT + ".tmp"
