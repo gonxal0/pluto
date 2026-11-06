@@ -1,509 +1,188 @@
 #EXTM3U
-#EXTINF:-1,Arirang
-https://amg02040-amg02040c6-xiaomi-international-5845.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Billiards TV (EU)
-https://newidco-billiardstv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,NEW KPOP (EU)
-https://newidco-newkid-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Rakuten Viki (EU)
-https://newidco-rakutenviki-2-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,YG TV (EU)
-https://newidco-ygtv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Bloomberg TV 4K (US)
-https://bloomberg-bloombergtv-3-us.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Bloomberg TV (EU)
-https://bloomberg-bloombergtv-3-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Boomberg Quicktake (EU)
-https://bloomberg-quicktake-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Rise Financial (EU)
-https://rise-financial-roi-tv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Demand Africa
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00017-theafricachanne-demandafrica-xiaomi/playlist.m3u8
-#EXTINF:-1,CNN News 18 India Geo
-https://amg00866-amg00866c1-xiaomi-in-3511.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,CNN News 18 Geo
-https://amg00866-amg00866c5-xiaomi-in-3550.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,CNBC TV 18 Geo
-https://amg00866-amg00866c2-xiaomi-in-3516.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,News 18 Madhya Pradesh Geo
-https://amg00866-amg00866c3-xiaomi-in-3553.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,News 18 Uttarakhand Geo
-https://amg00866-amg00866c4-xiaomi-in-3552.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,News 18 Tamil Nadu Geo
-https://amg00866-amg00866c6-xiaomi-in-3554.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,News 18 Gujarati Geo
-https://amg00866-amg00866c7-xiaomi-in-3551.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,News 18 Bangla Geo
-https://amg00866-amg00866c8-xiaomi-in-3555.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,TED Conferences (US)
-https://tedconferences-ted-1-us.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Cops (GB)
-https://langleyproductions-cops-2-gb.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Lovestories TV (EU)
-https://lovestoriestv-lovestoriestv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Nosey other (EU)
-https://nosey-3-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Real Nosey (EU)
-https://nosey-realnosey-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Shade TV (EU)
-https://shadeiqllc-shadetv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,The Red Green Show (EU)
-https://answermedia-theredgreenshow-2-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Ted Talks (EU)
-https://tedconferences-ted-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Crime and Punishment (US)
-https://rightsboosterltd-crime-and-punishment-1-us.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Conflict (US)
-https://rightsboosterltd-conflict-1-us.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Law and Crime
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00260-lawnewzincdbala-lawandcrime-xiaomi/playlist.m3u8
-#EXTINF:-1,Strongman Champions League (DE)
-https://rightsboosterltd-scl-2-de.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Super Simple Songs (EU)
-https://janson-supersimplesongs-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,PocketWatch
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00286-pocketwatch-pocketwatch-xiaomi/playlist.m3u8	
-#EXTINF:-1,Yu-Gi-Oh (GB)
-https://fastmedia-yu-gi-oh-1-gb.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Yu-Gi-Oh (DE)
-https://fastmedia-yu-gi-oh-2-de.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Yu-Gi-Oh (ES)
-https://fastmedia-yu-gi-oh-5-es.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Yu-Gi-Oh (FR)
-https://fastmedia-yu-gi-oh-4-fr.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Yu-Gi-Oh (IT)
-https://fastmedia-yu-gi-oh-3-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Naruto Geo
-https://amg00609-palatinmedia-amg00609c1-xiaomi-international-544.playouts.now.amagi.tv/playlist/amg00609-palatinmediafast-naruto-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Mr Bean Animated (IT) Geo
-https://amg00627-amg00627c29-xiaomi-international-4920.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanitcc-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Mr Bean Animated (ES) Geo
-https://amg00627-amg00627c30-xiaomi-international-4916.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanescc-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Mr Bean Animated (FR) Geo
-https://amg00627-amg00627c31-xiaomi-international-4917.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanfrcc-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Mr Bean Animated (BR) Geo
-https://amg00627-amg00627c35-xiaomi-international-4921.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanbr-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Mr Bean Animated check
-https://amg00627-amg00627c32-xiaomi-international-4918.playouts.now.amagi.tv/playlist/amg00627-banijayfast-mrbeanencc-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Travel XP (EU)
-https://travelxp-travelxp-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Travel XP (EU) alt
-https://travelxp-travelxp-5-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Travel XP (DE)
-https://travelxp-travelxp-2-de.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Travel XP (FR)
-https://travelxp-travelxp-4-fr.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Young Hollywood
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00143-younghollywoodl-younghollywood-xiaomi/playlist.m3u8
-#EXTINF:-1,Watch Mojo (EU)
-https://watchmojo-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Trailers (UK) Geo
-https://amg01821-lovetv-amg01821c3-xiaomi-international-656.playouts.now.amagi.tv/playlist/amg01821-lovetvfast-trailersuk-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Trailers (ES) Geo
-https://amg01821-lovetv-amg01821c2-xiaomi-international-650.playouts.now.amagi.tv/playlist/amg01821-lovetvfast-trailerses-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Trailers (FR) Geo
-https://amg01821-lovetv-amg01821c4-xiaomi-international-657.playouts.now.amagi.tv/playlist/amg01821-lovetvfast-trailersfr-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Trailers (DE) Geo
-https://amg01821-lovetv-amg01821c6-xiaomi-international-659.playouts.now.amagi.tv/playlist/amg01821-lovetvfast-trailersde-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Trailers (IT)
-https://amg01821-lovetv-amg01821c8-xiaomi-international-751.playouts.now.amagi.tv/playlist/amg01821-lovetvfast-trailersit-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Mytime (UK)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00500-studiocitypictu-mytimeuk-xiaomi/playlist.m3u8
-#EXTINF:-1,Mytime (ES)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00500-studiocitypictu-mytimees-xiaomi/playlist.m3u8
-#EXTINF:-1,Mytime (FR)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00500-studiocitypictu-mytimefr-xiaomi/playlist.m3u8
-#EXTINF:-1,Mytime (DE)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00500-studiocitypictu-mytimede-xiaomi/playlist.m3u8
-#EXTINF:-1,Top True Crime Geo
-https://amg00609-palatinmedia-amg00609c2-xiaomi-international-546.playouts.now.amagi.tv/playlist/amg00609-palatinmediafast-toptruecrime-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Craction TV Geo
-https://amg00609-palatinmedia-amg00609c3-xiaomi-international-547.playouts.now.amagi.tv/playlist/amg00609-palatinmediafast-craction-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,TopFilme Geo
-https://amg00609-palatinmedia-amg00609c4-xiaomi-international-1862.playouts.now.amagi.tv/playlist/amg00609-palatinmediafast-topfilme-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Drone TV (EU)
-https://airvuz-dronetv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Go USA (EU)
-https://brandusa-gousa-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Food (EU)
-https://food-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Today's Homeowner (EU)
-https://janson-todayshomeowner-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Homeful
-https://amg00090-amg00090c15-xiaomi-international-4616.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Ditty TV (EU)
-https://memphisstudios-dittytv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Ditty TV (US)
-https://memphisstudios-dittytv-1-us.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Brat TV
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00350-bratstudio-bratttv-xiaomi/playlist.m3u8
-#EXTINF:-1,Whoa That Was Wild (EU)
-https://newsflare-whoathatwaswild-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,BRB (EU)
-https://playworksdigital-brb-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Ninja Kidz TV (EU)
-https://playworksdigital-ninjakidztv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Jelly Jammy World
-https://amg01553-amg01553c1-xiaomi-in-5971.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Now 70s 
-https://lightning-now70s-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,Now 80s 
-https://lightning-now80s-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,Now 90s 
-https://lightning-now90s-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,Pulse
-https://lightning-pulse-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,Kids TV (US)
-https://jansonmedia-kidstv-1-us.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,MoreU (EU)
-https://bec-moreu-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,MoreU (US)
-https://bec-moreu-1-us.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Xploration Station (GB)
-https://srpdigital-xplorationstation-1-gb.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,WildEarth
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01290-wildearthgroupl-wildearth-xiaomi/playlist.m3u8
-#EXTINF:-1,Vivaldi TV
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01297-mezzo-vivalditv-xiaomi/playlist.m3u8
-#EXTINF:-1,My Padel
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01970-mypadeldigitals-mypadle-xiaomi/playlist.m3u8
-#EXTINF:-1,Flo Cine
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01768-flou-flou-xiaomi/playlist.m3u8
-#EXTINF:-1,ComedyDynamics
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01201-cinedigmenterta-comedydynamics-xiaomi/playlist.m3u8
-#EXTINF:-1,Mtrsprt 1
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg02873-kravemedia-mtrspt1-xiaomi/playlist.m3u8
-#EXTINF:-1,Fuel TV (UK)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01074-fueltv-fueltv-uk-en-xiaomi/playlist.m3u8
-#EXTINF:-1,Fuel TV (FR)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01074-fueltv-fueltvemeafrance-xiaomi/playlist.m3u8
-#EXTINF:-1,Fuel TV (ES)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01074-fueltv-fueltvemeaspa-xiaomi/playlist.m3u8
-#EXTINF:-1,Mav TV Geo
-https://amg00378-mavtv-amg00378c2-xiaomi-international-1789.playouts.now.amagi.tv/playlist/amg00378-mavtvfast-motorsportsnetwork-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Strongmans Champion League (EU)
-https://rightsboosterltd-scl-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Outdoor Action (EU)
-https://careco-outdoor-action-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Teen Vee English 
-https://amg02051-soulpublishing-amg02051c5-xiaomi-international-383.playouts.now.amagi.tv/playlist/amg02051-admecyltd-teenveeenglish-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,La LA Life English 
-https://amg02051-soulpublishing-amg02051c8-xiaomi-in-398.playouts.now.amagi.tv/playlist/amg02051-admecyltd-lalalifeenglish-xiaomiin/playlist.m3u8
-#EXTINF:-1,Slick Slime Sam English
-https://amg02051-soulpublishing-amg02051c12-xiaomi-international-384.playouts.now.amagi.tv/playlist/amg02051-admecyltd-slickslimesamenglish-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,123 Go! English (IN)
-https://amg02051-soulpublishing-amg02051c17-xiaomi-in-399.playouts.now.amagi.tv/playlist/amg02051-admecyltd-123goenglish-xiaomiin/playlist.m3u8
-#EXTINF:-1,123 Go! Spanish 
-https://amg02051-soulpublishing-amg02051c18-xiaomi-international-372.playouts.now.amagi.tv/playlist/amg02051-admecyltd-123gospanish-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Ideas En 5 Minutos Spanish
-https://amg02051-soulpublishing-amg02051c3-xiaomi-international-370.playouts.now.amagi.tv/playlist/amg02051-admecyltd-5minutecraftsspanish-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Brightside English 
-https://amg02051-soulpublishing-amg02051c9-xiaomi-international-385.playouts.now.amagi.tv/playlist/amg02051-admecyltd-brightsideenglish-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Brightside Spanish Geo
-https://amg02051-soulpublishing-amg02051c16-xiaomi-international-371.playouts.now.amagi.tv/playlist/amg02051-admecyltd-brightsidespanish-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,PowerNation
-https://amg01258-raycom-amg01258c1-xiaomi-international-907.playouts.now.amagi.tv/playlist/amg01258-raycomsportsfast-powernation-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Cine Friki (IN) Geo
-https://amg00711-zylo-amg00711c1-xiaomi-in-1317.playouts.now.amagi.tv/playlist/amg00711-zylofast-cinefriki-xiaomiin/playlist.m3u8
-#EXTINF:-1,Beond TV Geo
-https://amg01681-beondtv-amg01681c1-xiaomi-international-378.playouts.now.amagi.tv/playlist/amg01681-amg01681c1-277/playlist.m3u8
-#EXTINF:-1,Freetv Drama Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-cinereal-xiaomi/playlist.m3u8
-#EXTINF:-1,Freetv Sureno Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-cinesureno-xiaomi/playlist.m3u8
-#EXTINF:-1,Freetv Terror Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-horrorfy-xiaomi/playlist.m3u8
-#EXTINF:-1,Freetv Familia Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-juntos-xiaomi/playlist.m3u8
-#EXTINF:-1,Freetv Accion Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-topcine-xiaomi/playlist.m3u8
-#EXTINF:-1,Freetv Accion Latm Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-topcinelatam-xiaomi/playlist.m3u8
-#EXTINF:-1,Freetv Estella latm Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-tucinelatam-xiaomi/playlist.m3u8
-#EXTINF:-1,Freetv Estella us Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-tucineus-xiaomi/playlist.m3u8
-#EXTINF:-1,Tucine Europe (EU) Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-tucineeurope-xiaomi/playlist.m3u8
-#EXTINF:-1,Cine Classico (EU) Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-cineclasicoeu-xiaomi/playlist.m3u8
-#EXTINF:-1,Masterchef Brasil Geo
-https://amg00627-amg00627c9-xiaomi-international-4915.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Tastemade
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00047-tastemade-tmes8intl-xiaomi/playlist.m3u8
-#EXTINF:-1,Tastemade (AU)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00047-tastemade-tminaaus-xiaomi/playlist.m3u8
-#EXTINF:-1,Tastemade (ES)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00047-tastemade-tmes16intl-xiaomi/playlist.m3u8
-#EXTINF:-1,Tastemade International
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00047-tastemade-tmintleng-xiaomi/playlist.m3u8
-#EXTINF:-1,Tastemade (DE)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00047-tastemade-tmgermany-xiaomi/playlist.m3u8
-#EXTINF:-1,MovieDome
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00771-kochfilmsgerman-moviedome-xiaomi/playlist.m3u8
-#EXTINF:-1,MovieDome Family
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00771-kochfilmsgerman-moviedomefamily-xiaomi/playlist.m3u8
-#EXTINF:-1,MovieDome (UK)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00771-kochfilmsgerman-moviedomeuk-xiaomi/playlist.m3u8
-#EXTINF:-1,Action Hollywood Movies
-https://lightning-actionhollywood-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,OAN Encore (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-oanencore-xiaomi/playlist.m3u8
-#EXTINF:-1,Frecuencia Novelas (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-frecuencianovelas-xiaomi/playlist.m3u8
-#EXTINF:-1,Cinenanar (Asia)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-cinenanar-xiaomi/playlist.m3u8
-#EXTINF:-1,Screamin (Asia)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-screamin-xiaomi/playlist.m3u8
-#EXTINF:-1,Emotional (Asia)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-emotional-xiaomi/playlist.m3u8
-#EXTINF:-1,Edgesports (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-edgesports-xiaomi/playlist.m3u8
-#EXTINF:-1,Sportsgrid (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-sportsgridin-xiaomi/playlist.m3u8
-#EXTINF:-1,Trace Sports Stars (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-tracesportsstar-xiaomi/playlist.m3u8
-#EXTINF:-1,Zee News (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-zeenews-xiaomi/playlist.m3u8
-#EXTINF:-1,Zee Business (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-zeebusiness-xiaomi/playlist.m3u8
-#EXTINF:-1,Zee 24 Ghanta (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-zee24ghantaa-xiaomi/playlist.m3u8
-#EXTINF:-1,Zee Bihar (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-zeebihar-xiaomi/playlist.m3u8
-#EXTINF:-1,Zee Taas (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-zeetaas-xiaomi/playlist.m3u8
-#EXTINF:-1,Zee Wion (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-zeewion-xiaomi/playlist.m3u8
-#EXTINF:-1,9XM (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-9xm-xiaomi/playlist.m3u8
-#EXTINF:-1,ABP Majha (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-abpmajha-xiaomi/playlist.m3u8
-#EXTINF:-1,India TV (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-indiatv-xiaomi/playlist.m3u8
-#EXTINF:-1,SBT International (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-sbtintl-xiaomi/playlist.m3u8
-#EXTINF:-1,TV9 Bangla (IN) Geo
-https://amg01106-tv9-amg01106c1-xiaomi-in-1073.playouts.now.amagi.tv/playlist/amg01106-tv9fast-tv9bangala-xiaomiin/playlist.m3u8
-#EXTINF:-1,TV9 Bharatvarsh (IN) Geo
-https://amg01106-tv9-amg01106c2-xiaomi-in-1187.playouts.now.amagi.tv/playlist/amg01106-tv9fast-tv9bharatvarsh-xiaomiin/playlist.m3u8
-#EXTINF:-1,TV9 Marathi (IN)
-https://amg01106-tv9-amg01106c3-xiaomi-in-1149.playouts.now.amagi.tv/playlist/amg01106-tv9fast-tv9marati-xiaomiin/playlist.m3u8
-#EXTINF:-1,TV9 Telegu (IN)
-https://amg01106-tv9-amg01106c5-xiaomi-in-1184.playouts.now.amagi.tv/playlist/amg01106-tv9fast-tv9telugu-xiaomiin/playlist.m3u8
-#EXTINF:-1,TV9 Kannada (IN) Geo
-https://amg01106-tv9-amg01106c6-xiaomi-in-1185.playouts.now.amagi.tv/playlist/amg01106-tv9fast-tv9kannada-xiaomiin/playlist.m3u8
-#EXTINF:-1,TV9 Gujarati (IN) Geo
-https://amg01106-tv9-amg01106c7-xiaomi-in-1186.playouts.now.amagi.tv/playlist/amg01106-tv9fast-tv9gujarathi-xiaomiin/playlist.m3u8
-#EXTINF:-1,ABP News (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-abpnews-xiaomi/playlist.m3u8
-#EXTINF:-1,ABP Ganga (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-abpganga-xiaomi/playlist.m3u8
-#EXTINF:-1,ABP Ananda (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-abpananda-xiaomi/playlist.m3u8
-#EXTINF:-1,ABP Asmita (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-abpasmita-xiaomi/playlist.m3u8
-#EXTINF:-1,ABP Sanjha (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-abpsanjha-xiaomi/playlist.m3u8
-#EXTINF:-1,B4U Movies
-https://amg00877-b4unew-amg00877c2-xiaomi-in-5489.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,B4U Kadak
-https://amg00877-b4unew-amg00877c4-xiaomi-in-5473.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Pitaara (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-pitaaraxiaomiin-xiaomi/playlist.m3u8
-#EXTINF:-1,Saga Music Haryanvi (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-sagamusicharyanvi-xiaomi/playlist.m3u8
-#EXTINF:-1,WPT (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-wpt-xiaomi/playlist.m3u8
-#EXTINF:-1,Young Hollywood (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-younghollywood-xiaomi/playlist.m3u8
-#EXTINF:-1,India TV
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01550-indiatv-indiatvlive-xiaomi/playlist.m3u8
-#EXTINF:-1,India TV Speed News
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01550-indiatv-indiatv-speed-mi-xiaomi/playlist.m3u8
-#EXTINF:-1,India TV Speed News alt Geo
-https://amg01550-amg01550c3-xiaomi-in-4367.playouts.now.amagi.tv/playlist/amg01550-indiatvfast-indiatvspeednews-xiaomiin/playlist.m3u8
-#EXTINF:-1,Aap Ki Adalat
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01550-indiatv-indiatv-aapkiadalat-mi-xiaomi/playlist.m3u8
-#EXTINF:-1,Ghaint Punjabi (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-ghaintpunjab-xiaomi/playlist.m3u8
-#EXTINF:-1,Saga Music (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-sagamusic-xiaomi/playlist.m3u8
-#EXTINF:-1,YRF Music (Asia)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01412-xiaomiasia-yrfmusic-xiaomi/playlist.m3u8
-#EXTINF:-1,Mango TV (IN) Geo
-https://amg01911-mangotv-amg01911c1-xiaomi-in-1270.playouts.now.amagi.tv/playlist/amg01911-mangomassmedia-mangotv-xiaomiin/playlist.m3u8
-#EXTINF:-1,Trace Sports Stars
-https://lightning-tracesportstars-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,Trace Sports Stars alt
-https://tracetv-tracesportstars-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,Mob TV
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01324-infamousmedia-mobtv-xiaomi/playlist.m3u8
-#EXTINF:-1,Matchroom Boxing Geo
-https://amg02302-amg02302c2-xiaomi-international-5834.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,PDC Darts Geo
-https://amg02302-amg02302c3-xiaomi-international-5835.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Unbeaten
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00721-inverleigh-unbeaten-xiaomi/playlist.m3u8
-#EXTINF:-1,Sport Outdoor TV (EU)
-https://gto2000-sportoutdoortv-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Sports Grid
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00315-sportsgrid-sportsgrid-xiaomi/playlist.m3u8
-#EXTINF:-1,Bike
-https://amg13231-amg13231c1-xiaomi-international-2911.playouts.now.amagi.tv/playlist/amg13231-actvefast-bike-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Skateboarding
-https://amg13231-amg13231c2-xiaomi-international-2913.playouts.now.amagi.tv/playlist/amg13231-actvefast-skateboarding-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Snowboarder
-https://amg13231-amg13231c3-xiaomi-international-2914.playouts.now.amagi.tv/playlist/amg13231-actvefast-snowboarder-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Surfer
-https://amg13231-amg13231c4-xiaomi-international-2910.playouts.now.amagi.tv/playlist/amg13231-actvefast-surfer-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Powder
-https://amg13231-amg13231c5-xiaomi-international-2912.playouts.now.amagi.tv/playlist/amg13231-actvefast-powder-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Inwild
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00861-terninternation-inwild-xiaomi/playlist.m3u8
-#EXTINF:-1,Inwonder
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00861-terninternation-inwonder-xiaomi/playlist.m3u8
-#EXTINF:-1,Inwonder HD
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00861-terninternation-inwonderhd-xiaomi/playlist.m3u8
-#EXTINF:-1,InTrouble
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00861-terninternation-introuble-xiaomi/playlist.m3u8
-#EXTINF:-1,Infast
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00861-terninternation-lifestyle-xiaomi/playlist.m3u8
-#EXTINF:-1,Infast alt
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg00861-terninternation-lifestylehd-xiaomi/playlist.m3u8
-#EXTINF:-1,Fashion TV
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01546-ftv-fashiontv-xiaomi/playlist.m3u8
-#EXTINF:-1,Wannasee
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01602-themahqfrance-wannasee-xiaomi/playlist.m3u8
-#EXTINF:-1,Nature Time
-https://amg01515-amg01515c13-xiaomi-international-4618.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Nature Time C14
-https://amg01515-amg01515c14-xiaomi-international-4619.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Museum TV
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01492-secomsasmediart-museumtven-xiaomi/playlist.m3u8
-#EXTINF:-1,Museum TV (FR)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01492-secomsasmediart-museumtvfr-xiaomi/playlist.m3u8
-#EXTINF:-1,MYZEN
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01255-secomcofites-my-myzenen-xiaomi/playlist.m3u8
-#EXTINF:-1,MYZEN (FR)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01255-secomcofites-my-myzenfr-xiaomi/playlist.m3u8
-#EXTINF:-1,Drive TV La Chaine Auto (FR) Geo
-https://amg01796-amg01796c2-xiaomi-international-2756.playouts.now.amagi.tv/playlist/amg01796-fastmediafast-drivetv-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Wasabi La Chaine Anime (FR) Geo
-https://amg01796-amg01796c3-xiaomi-international-2755.playouts.now.amagi.tv/playlist/amg01796-fastmediafast-wasabii-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Le Figaro (FR) Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01767-secomiftvlefiga-lefigaro-xiaomi/playlist.m3u8
-#EXTINF:-1,Motus La Chaine
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01796-fastmediabackbo-motuslachaine-xiaomi/playlist.m3u8
-#EXTINF:-1,Enquetesdechoc
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01796-fastmediabackbo-enquetesdechoc-xiaomi/playlist.m3u8
-#EXTINF:-1,Qui veut gagner des millions Geo
-https://amg02393-awpg-amg02393c1-xiaomi-international-2301.playouts.now.amagi.tv/playlist/amg02393-awpg-quiveutgagnerdesmillions-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Lesanges Geo
-https://amg02393-awpg-amg02393c2-xiaomi-international-2300.playouts.now.amagi.tv/playlist/amg02393-awpg-lesanges--xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Les Z Amours Geo
-https://amg02393-awpg-amg02393c3-xiaomi-international-2303.playouts.now.amagi.tv/playlist/amg02393-awpg-leszamours-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Le Meilleur de la Tele-Realite Geo
-https://amg02393-awpg-amg02393c4-xiaomi-international-2302.playouts.now.amagi.tv/playlist/amg02393-awpg-lemeilleurdelatvrealite-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Love Crime and History
-https://amg01821-amg01821c16-xiaomi-international-4605.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Love Wine
-https://amg01821-amg01821c17-xiaomi-international-4602.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Historia Y Vida
-https://amg01821-amg01821c22-xiaomi-international-4608.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Love Crime and History Spain
-https://amg01821-amg01821c23-xiaomi-international-4612.playouts.now.amagi.tv/playlist/amg01821-lovetvfast-lovecrimeandhistoryspain-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Voyages and Saveur
-https://amg01821-amg01821c24-xiaomi-international-4603.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Viggo and Supporo
-https://amg01821-amg01821c25-xiaomi-international-4607.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1,Homicide
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01796-fastmediabackbo-homicide-xiaomi/playlist.m3u8
-#EXTINF:-1,Yaquelaverite
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01796-fastmediabackbo-yaquelaverite-xiaomi/playlist.m3u8
-#EXTINF:-1,Love the Planet (ES) Geo
-https://amg01821-lovetv-amg01821c9-xiaomi-international-752.playouts.now.amagi.tv/playlist/amg01821-lovetvfast-lovetheplanetsp-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,Petclub
-https://lightning-petclub-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,Clubbing TV
-https://clubbingtv-xiaomi.amagi.tv/playlist.m3u8
-#EXTINF:-1,Fusebeat (UK)
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00375-fusemedia-fusebeatuk-xiaomi/playlist.m3u8
-#EXTINF:-1,Latido Music Geo
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00274-vidaprimo-latidomusic-xiaomi/playlist.m3u8
-#EXTINF:-1,Wedo Movies 
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00735-videosolutionsa-movies4free-xiaomi/playlist.m3u8
-#EXTINF:-1,Watch4Movies
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00735-videosolutionsa-watch4movies-xiaomi/playlist.m3u8
-#EXTINF:-1,Trace Brazuca
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01131-tracetv-tracebrazuca-xiaomi/playlist.m3u8
-#EXTINF:-1,Trace Latina
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01131-tracetv-tracelatina-xiaomi/playlist.m3u8
-#EXTINF:-1,Trace Urban
-https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01076-lightningintern-traceurban-xiaomi/playlist.m3u8
-#EXTINF:-1,CGTV (IT)
-https://cgentertainment-cgtv-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Love The Planet (IT)
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01821-lovetvchannels-lovetheplanetit-xiaomi/playlist.m3u8
-#EXTINF:-1,Serially Drama (IT)
-https://ixmediasrl-serially-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Serially Crime (IT)
-https://ixmediasrl-seriallycrime-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Risate al Sud (IT)
-https://ixmedia-srl-risatealsud-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Cinemasegreto (IT)
-https://minerva-cinemasegreto-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Fullmoon (IT)
-https://minerva-fullmoon-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Risate All Italiana
-https://minerva-risateallitaliana-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,The Boat Show (IT)
-https://boatshowtvsrl-theboatshow-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Sailing Channel (IT)
-https://vitormedia-sailingchannel-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,WP (IT)
-https://minerva-wp-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Chili Alta Tensione (IT)
-https://chili-chili-alta-tensione-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Chili Buonumore (IT)
-https://chili-chilibuonumore-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Chili Indimenticabili (IT)
-https://chili-chiliindimenticabili-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Chili Velvet (IT)
-https://chili-chilivelvet-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Chili Hip Hop TV (IT)
-https://chili-hiphop-tv-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Chili Rock TV (IT)
-https://chili-rock-tv-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Sorrisi (IT)
-https://chili-film-sorrisi-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Bizzaro Movies (IT)
-https://minerva-bizzarromovies-1-it.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,123 Go! (ES)
-https://amg02051-soulpublishing-amg02051c9-xiaomi-international-385.playouts.now.amagi.tv/playlist/amg02051-admecyltd-123gospanish-xiaomiinternational/playlist.m3u8
-#EXTINF:-1,RCN Mas (EU)
-https://rcntv-rcnmas-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Cine Classico (EU) Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-cineclasicoeu-xiaomi/playlist.m3u8
-#EXTINF:-1,Flash Geo
-https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-flash-xiaomi/playlist.m3u8
-#EXTINF:-1,Charlie (EU)
-https://amogonetworx-charlie-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Telenovela TV (FR)
-https://stormcast-telenovelatv-1-fr.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Bref Cinema (EU)
-https://lagenceducourtmetrage-brefcinema-01-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,ETV (GB)
-https://sasuprimetv-etv-1-gb.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,ETV (FR)
-https://sasuprimetv-etv-2-fr.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Pelimex (EU)
-https://telecine-pelimex-1-eu.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Sonyone Compentencias (MX)
-https://spt-sonyonecompetencias-1-mx.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Sonyone Sharktank (MX)
-https://spt-sonyonesharktank-1-mx.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Sony Comedias (MX)
-https://spt-sonyonecomedias-mx.xiaomi.wurl.tv/playlist.m3u8
-#EXTINF:-1,Sony Novelas (MX)
-https://spt-sonyonenovelas-1-mx.xiaomi.wurl.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="66165" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/733e9f6b55887c06895e3e77ece17cb7.webp" group-title="Para ti",Qwest TV
+https://amg00447-qwesttv-amg00447c1-xiaomi-international-978.playouts.now.amagi.tv/playlist/amg00447-qwesttvfast-qwesttvlg-xiaomiinternational/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&did=00000000-0000-4000-8000-000000000000&us_privacy=1---&gdpr=0&consent=&is_lat=0&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&coppa=0&ifa_type=aaid&custom_7=
+#EXTINF:-1 tvg-id="66192" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/d18e20f122099be20ca06a0dcf803fb9.webp" group-title="Para ti",Euro Hits
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=eurohits&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=222&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66163" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/25d3d704724193a5c6ad5fb020e6ce71.webp" group-title="Para ti",Power Nation
+https://amg01258-raycom-amg01258c1-xiaomi-international-907.playouts.now.amagi.tv/playlist/amg01258-raycomsportsfast-powernation-xiaomiinternational/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&did=00000000-0000-4000-8000-000000000000&us_privacy=1---&gdpr=0&consent=&is_lat=0&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&coppa=0&ifa_type=aaid&custom_7=
+#EXTINF:-1 tvg-id="66280" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/3a2bbf0c5e1da79036e36c912b8051e0.webp" group-title="Para ti",Wildest Wish
+https://streams2.sofast.tv/ptnr-xiaomi/title-WILDEST-WISH-TV-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/f3483458-76af-4850-bda6-8b1035233b42/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="67066" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/46c6a762116374ad6b707adba0b92859.webp" group-title="Para ti",GameON
+https://ffcdb983.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X0dhbWVPTkludGVybmF0aW9uYWxfSExT/playlist.m3u8?ads.wurl_channel=2295&ads.wurl_name=GameONInternational&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="66170" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/9ccef0f44ff1996b4a5ba7f677d064dd.webp" group-title="Para ti",Whoa! That was Wild!
+https://96392bf971c24d78be350d7af46087b3.mediatailor.us-east-1.amazonaws.com/v1/master/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/Xiaomi-eu_WhoaThatWasWild/playlist.m3u8?ads.wurl_channel=1540&ads.wurl_name=WhoaThatWasWild&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="66290" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/c9e517de94e9bf94cadedea22103a24e.webp" group-title="Para ti",SPORT-FISHING-TV-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-SPORT-FISHING-TV-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/46ae6aaa-6e45-43ec-8e7a-b1a2d21a69d6/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66277" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/4dc3942040fa4580e16ab91847a42df3.webp" group-title="Para ti",CARTOON TV CLASSIC
+https://streams2.sofast.tv/ptnr-xiaomi/title-CARTOON-TV-CLASSICS-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/5b8475ad-9acc-442a-86ff-c9ab8970c460/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66296" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/ef3a9a9fddbd126c4727da412457e93f.webp" group-title="Para ti",ESCAPE-TV
+https://streams2.sofast.tv/ptnr-xiaomi/title-ESPCAPE_TV_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/48c5a651-b9ca-4484-aedf-48cba46b3463/master.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66293" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/cf483774b924c6118623d6868fe5f09c.webp" group-title="Para ti",HUNT-FISH-TV-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-HUNT_FISH_TV_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/cc8bac8d-f1e2-4bd3-868c-30fead7bc1e7/master.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="65587" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/0aac55735cef39d3aa93e3d35fe22e4a.webp" group-title="Para ti",SKWAD
+https://api-ott.sqadplay.com/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=skwadplay&content_channel=skwad&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=261346&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66304" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/45af5202870ea5f0e55ae6c8e596437c.webp" group-title="Para ti",SURFER
+https://amg13231-amg13231c4-xiaomi-international-2910.playouts.now.amagi.tv/playlist/amg13231-actvefast-surfer-xiaomiinternational/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&did=00000000-0000-4000-8000-000000000000&us_privacy=1---&gdpr=0&gdpr_consent=&is_lat=0&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&coppa=0&ifa_type=aaid&custom_7=
+#EXTINF:-1 tvg-id="65583" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/38fe949568865e09266664f6e0e41b60.webp" group-title="Para ti",NHRA TV
+https://api-ott.nhra.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=nhratv&content_channel=nhratv&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=24&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67116" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/3440798a3f94c9ce96a68f88a156fcbe.webp" group-title="Nuevo en Xiaomi TV+",Piel Salvaje
+https://amg00735-amg00735c70-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n1/playlist/amg00735-amg00735c70-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=WedoAmorPielSalvajeENG&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=VideoSolutions&pod_ad_slots=&prodq=&schain=&us_privacy=1---&app_category=&content_context=&custom_7=&device_language=&device_type=
+#EXTINF:-1 tvg-id="66225" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/7f18ee4652de0cfee2d6057c71a743ef.webp" group-title="Nuevo en Xiaomi TV+",Y2K
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=y2k&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=224&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67023" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/1bf31bfb938371f24d1e98ccf31df57b.webp" group-title="Nuevo en Xiaomi TV+",Caracol Mix
+https://api-ott.caracoltv.com/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=caracolmix&content_channel=caracolmix&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=13&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67072" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/f2484a4d67279afffca76dc98708c69e.webp" group-title="Nuevo en Xiaomi TV+",CJ ENM K-POP
+https://d33544ea.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X0NKX0tQT1BfRkFTVF9HTE9CQUwtMV9ITFM/playlist.m3u8?ads.wurl_channel=2236&ads.wurl_name=CJ_KPOP_FAST_GLOBAL&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="66978" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/eb370a9092f470b56dce910eef78d9ba.webp" group-title="Nuevo en Xiaomi TV+",The Therapy Crouch
+https://api-ott.marvellousclub.com/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=marvellousmedia&content_channel=thetherapycrouch&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=15&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67110" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/a12116baee03081c74b5f13d630aa7fa.webp" group-title="Nuevo en Xiaomi TV+",eClutchAccess
+https://amg01715-amg01715c4-amgplt0913.playout.now3.amagi.tv/ts-us-e2-n1/playlist/amg01715-amg01715c4-amgplt0913/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=eClutchAccess&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=iKOMediaGroup&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67111" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/2e3e5d15715944ab784844c45b0f6c89.webp" group-title="Nuevo en Xiaomi TV+",eClutch Live2
+https://amg01715-amg01715c3-amgplt0068.playout.now3.amagi.tv/ts-us-e2-n1/playlist/amg01715-amg01715c3-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=eClutch%20Live2&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=iKOMediaGroup&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67095" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/d2f9c5274e3e848f29c35e5351270b9b.webp" group-title="Nuevo en Xiaomi TV+",Wedo-movies-EN
+https://amg00735-amg00735c41-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg00735-amg00735c41-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=Wedo-movies-EN&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=VideoSolutionsAG&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67079" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/e71e2cd09b3e57e682b809f276e02952.webp" group-title="Nuevo en Xiaomi TV+",WedoSports
+https://amg00735-amg00735c19-amgplt0407.playout.now3.amagi.tv/ts-eu-w1-n2/playlist/amg00735-amg00735c19-amgplt0407/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&ifa_type=aaid&is_lat=0&us_privacy=1---&channel_name=Wedo-sportDE&content_livestream=&gpp_sid=&gpp=&ic=&idtype=&iu=&inv_partner_domain=&lmt=&network_name=VideoSolutionsAG&pod_ad_slots=&prodq=&schain=
+#EXTINF:-1 tvg-id="67082" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/6aa716ee1d6713144d8f85756027abbc.webp" group-title="Nuevo en Xiaomi TV+",WedoAmor
+https://amg00735-amg00735c24-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg00735-amg00735c24-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=WedoAmor&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=VideoSolutionsAG&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67058" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/7e1093f28adcf4a4773440da89557507.webp" group-title="Nuevo en Xiaomi TV+",Cest Pas Sorcier
+https://amg30706-amg30706c2-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg30706-amg30706c2-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=House%20of%20Joy%20Studio&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67067" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/bd027db2ed753ecacd0b57390ae7fb89.webp" group-title="Nuevo en Xiaomi TV+",TrendON
+https://6ce86fbb.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X1RyZW5kT04tSW50ZXJuYXRpb25hbF9ITFM/playlist.m3u8?ads.wurl_channel=2307&ads.wurl_name=TrendON-International&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="67065" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/b729c1962db832c5da82183960b34ad0.webp" group-title="Nuevo en Xiaomi TV+",TravelON
+https://5f74aa5e.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X1RyYXZlbE9OSW50ZXJuYXRpb25hbF9ITFM/playlist.m3u8?ads.wurl_channel=2306&ads.wurl_name=TravelONInternational&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="67064" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/f0fe28ad05f5ae3a8f7ee4c5941ef638.webp" group-title="Nuevo en Xiaomi TV+",FoodON
+https://5f54aac8.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X0Zvb2RPTi1JbnRlcm5hdGlvbmFsX0hMUw/playlist.m3u8?ads.wurl_channel=2305&ads.wurl_name=FoodON-International&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="67051" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/5138bf86baf5baf659ef80daf1fc6e20.webp" group-title="Nuevo en Xiaomi TV+",Tennis Plus
+https://amg01935-amg01935c1-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg01935-amg01935c1-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=TennisAustralia&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67032" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/f9f3a1afb673c3aa3ab5f32155292456.webp" group-title="Nuevo en Xiaomi TV+",Barca 24H
+https://amg17560-amg17560c1-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg17560-amg17560c1-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=FC%20Barcelona&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67031" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/e8ebaa0c2521c180d4d3803089f89c8a.webp" group-title="Nuevo en Xiaomi TV+",DAZN Ringside
+https://amg00451-amg00451c23-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg00451-amg00451c23-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67003" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/2e068a70e6b82ca416c04fd42438b493.webp" group-title="Nuevo en Xiaomi TV+",RUGBY-ZONE-TV
+https://streams2.sofast.tv/ptnr-xiaomi/title-RUGBY_ZONE_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/8cff51e8-8824-4294-8091-87c913fee721/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="67000" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/1ade7abfd3a76f2a444ee36baa4bce7f.webp" group-title="Nuevo en Xiaomi TV+",BILLIARDS-PLUS
+https://streams2.sofast.tv/ptnr-xiaomi/title-billiards__Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/206ace92-00d9-4376-bc94-383267ac85bc/master.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66802" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/f095ee5666f0043ae2869ce73b1cccbf.webp" group-title="Nuevo en Xiaomi TV+",Billiard TV
+https://api-ott.tripleb.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=triplebmedia&content_channel=billiardtv&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=179&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66998" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/5981f92ccf6d5bbaa8a42471307f8d3d.webp" group-title="Nuevo en Xiaomi TV+",FIGHT-TV-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-FIGHT-TV-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/a793a671-4332-41fc-be40-9e2fd193bd2a/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66800" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/a34b7b0a7f0a5e51c04b1b8ca20c774c.webp" group-title="Nuevo en Xiaomi TV+",Bark TV
+https://api-ott.tripleb.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=triplebmedia&content_channel=barktv&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=851&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66229" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/67700f49e1fd0dbc8d119ee9eaa38781.webp" group-title="Nuevo en Xiaomi TV+",Stingray Naturescape
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=stingraynaturescape&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=154&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66218" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/7a65a8136ef546e48d9729e8d0655f10.webp" group-title="Nuevo en Xiaomi TV+",Qello Concerts
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=qelloconcerts&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=240&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67011" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/53e41eef6fd903febe5b51b5c0094554.webp" group-title="Nuevo en Xiaomi TV+",Reuters
+https://amg00453-amg00453c1-amgplt0068.playout.now3.amagi.tv/ts-us-e2-n1/playlist/amg00453-amg00453c1-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="66225" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/7f18ee4652de0cfee2d6057c71a743ef.webp" group-title="Música",Y2K
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=y2k&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=224&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67072" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/f2484a4d67279afffca76dc98708c69e.webp" group-title="Música",CJ ENM K-POP
+https://d33544ea.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X0NKX0tQT1BfRkFTVF9HTE9CQUwtMV9ITFM/playlist.m3u8?ads.wurl_channel=2236&ads.wurl_name=CJ_KPOP_FAST_GLOBAL&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="66957" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/173752d6d2619db608cd1dc2f3547c60.webp" group-title="Música",Concerto
+https://amg01076-amg01076c14-xiaomi-international-11199.playouts.now.amagi.tv/ts-us-w2-n1/playlist/amg01076-lightning-concerto-xiaomiinternational/playlist.m3u8?gdpr_consent=&gdpr=0&custom_7=&app_bundle=com.mitv.tvhome.mitvplus&is_lat=0&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&coppa=0&app_name=Xiaomi%20TV%2B&did=00000000-0000-4000-8000-000000000000&ifa_type=aaid&dnt=
+#EXTINF:-1 tvg-id="66208" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/cca8876e59e6b49d3ceadd7739e5978b.webp" group-title="Música",Éxitos del Momento
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=xitosdelmomento&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=216&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66849" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/59cb65e2694d02d4d77f46661ff0eeb7.webp" group-title="Música",Loupe Art by Stingray
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=loupeartbystingray&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=432&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66214" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/e3dc656949907035b72e22bd0836b27a.webp" group-title="Música",Hip-Hop/R&B
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=hiphoprb&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=214&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66216" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/921933e9938ad0fe984ce0621207d73e.webp" group-title="Música",Alternative Rock
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=alternativerock&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=210&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66193" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/15efedae4fab25df83df32aab17dd5ca.webp" group-title="Música",Today's K-Pop
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=todayskpop&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=226&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66217" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/c6666a776b3b969f7d5a96ba4bc721b8.webp" group-title="Música",Nothin' But 90's
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=nothinbut90s&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=208&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66234" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/b9aab5e667c4a45ba4d9d98f629f6cc8.webp" group-title="Música",The Spa
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=thespa&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=206&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66203" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/a697c2b1d7302511d9d60fc06b6242a6.webp" group-title="Música",Flashback 70s
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=flashback70s&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=202&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66199" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/2612bda8eac8947d810a05ff8db89923.webp" group-title="Música",Smooth Jazz
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=smoothjazz&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=220&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66195" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/138f51c059ecf1291d922993500fa035.webp" group-title="Música",Easy Listening
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=easylistening&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=218&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66204" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/53d2db9fcf67dac3a6a909778f34d553.webp" group-title="Música",Hit List
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=hitlist&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=230&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66198" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/afbc58c1ea7cf6f421c2ace5597c75bd.webp" group-title="Música",Remember the 80s
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=rememberthe80s&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=232&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66207" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/221a803c6315fa0afb033270fe11fa4a.webp" group-title="Música",Pop Adult
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=popadult&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=212&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66235" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/dce41c16686de767c6f4d753172112f2.webp" group-title="Música",Hot Country Christmas
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=hotcountrychristmas&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=204&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66237" group-title="Música",Soul Storm Christmas
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=soulstormchristmas&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=236&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66417" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/7c589338f41469497774064323e1c7c6.webp" group-title="Música",ZUT-TV
+https://streams2.sofast.tv/ptnr-xiaomi/title-ZUT_TV_INT_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/d9f214c8-d0f6-4d79-a81c-a0c068665e31/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66206" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/82ae70783ce41c3a3a5286b252b8be41.webp" group-title="Música",Classic Rock
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=classicrock&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=228&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66215" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/d79e4db35f39059e3e386c11cf0c3103.webp" group-title="Música",Greatest Holiday Hits
+https://api-ott-adnet-oan.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=adnet&content_channel=greatestholidayhits&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=234&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67095" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/d2f9c5274e3e848f29c35e5351270b9b.webp" group-title="Cine",Wedo-movies-EN
+https://amg00735-amg00735c41-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg00735-amg00735c41-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=Wedo-movies-EN&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=VideoSolutionsAG&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="66292" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/9b4d53e5524e2c62a07e93ebb942357a.webp" group-title="Cine",WESHORT-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-WESHORT-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/bf7acf1e-950b-4c35-8a44-fb256fbe752c/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66267" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/571d898983e80a9bbcc0eb00bda016ae.webp" group-title="Cine",HORROR-TV-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-HORROR-TV-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/bd640a74-8a59-4a6e-bb49-6a34d1dd68bc/master.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66414" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/cfdb4de58c70ff662ea31d2479d48589.webp" group-title="Cine",SCIFI-WORLD-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-SCIFI-WORLD-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/7b44e22c-04ba-443b-a6d0-4657ef17fea3/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66023" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/81ebca36f9a82d708a4bb8b39f904174.webp" group-title="Cine",Charlie - Silent Movies
+https://71c97a3c3a0b4de18fed7d6c48a4a6ac.mediatailor.us-east-1.amazonaws.com/v1/master/0fb304b2320b25f067414d481a779b77db81760d/Xiaomi-eu_CharlieSilentMovies/playlist.m3u8?ads.wurl_channel=1410&ads.wurl_name=CharlieSilentMovies&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="66301" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/40c84ca70d7e3ec1f49182487f43840f.webp" group-title="Cine",BEST-DRAMA-TV
+https://streams2.sofast.tv/ptnr-xiaomi/title-BEST_DRAMA_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/a14adf60-55d4-4344-92ed-f06b08219212/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="67064" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/f0fe28ad05f5ae3a8f7ee4c5941ef638.webp" group-title="Estilo de vida",FoodON
+https://5f54aac8.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X0Zvb2RPTi1JbnRlcm5hdGlvbmFsX0hMUw/playlist.m3u8?ads.wurl_channel=2305&ads.wurl_name=FoodON-International&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="67065" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/b729c1962db832c5da82183960b34ad0.webp" group-title="Estilo de vida",TravelON
+https://5f74aa5e.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X1RyYXZlbE9OSW50ZXJuYXRpb25hbF9ITFM/playlist.m3u8?ads.wurl_channel=2306&ads.wurl_name=TravelONInternational&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="67067" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/bd027db2ed753ecacd0b57390ae7fb89.webp" group-title="Estilo de vida",TrendON
+https://6ce86fbb.wurl.com/master/f36d25e7e52f1ba8d7e56eb859c636563214f541/WGlhb21pLWV1X1RyZW5kT04tSW50ZXJuYXRpb25hbF9ITFM/playlist.m3u8?ads.wurl_channel=2307&ads.wurl_name=TrendON-International&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="65607" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/a474643a3970a91ec9d3421710b60cea.webp" group-title="Estilo de vida",Cooking Panda Linear Channel
+https://api-ott-cookingpanda.ottera.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=cookingpanda&content_channel=cookingpandalinearchannel&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=901&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="66416" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/a2434557b15464d714c41f0f1a32696d.webp" group-title="Estilo de vida",SPACE-SERIES
+https://streams2.sofast.tv/ptnr-xiaomi/title-Space_Series_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/1bed88fb-8ffb-48dd-8da7-a10364f5c2d5/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66274" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/3a28fb152b4b3a5ed32d1e153b830ef2.webp" group-title="Estilo de vida",HERITAGETV
+https://streams2.sofast.tv/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/5a40ff3f-02b7-4c4b-a053-9b795e1af231/manifest.m3u8?ads.is_lat=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.device_make=Xiaomi&ads.device_id=00000000-0000-4000-8000-000000000000&ads.custom_7=
+#EXTINF:-1 tvg-id="66276" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/d93de6897c62d17cedcead4f005d9e1f.webp" group-title="Estilo de vida",LOVE 2 HATE
+https://streams2.sofast.tv/ptnr-xiaomi/title-LOVE-2-HATE-TV-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/7b6b622f-87f7-43d5-9823-7b35cba1114f/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66285" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/a518b7d151da55c2fb2f1912ac1e3389.webp" group-title="Estilo de vida",HERITAGE-TOURISM-TV-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-HERITAGE-TOURISM-TV-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/a5cd5230-6c17-4ab7-99f3-b008f2b837c3/master.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="67110" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/a12116baee03081c74b5f13d630aa7fa.webp" group-title="Deportes y aire libre",eClutchAccess
+https://amg01715-amg01715c4-amgplt0913.playout.now3.amagi.tv/ts-us-e2-n1/playlist/amg01715-amg01715c4-amgplt0913/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=eClutchAccess&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=iKOMediaGroup&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67111" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/2e3e5d15715944ab784844c45b0f6c89.webp" group-title="Deportes y aire libre",eClutch Live2
+https://amg01715-amg01715c3-amgplt0068.playout.now3.amagi.tv/ts-us-e2-n1/playlist/amg01715-amg01715c3-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=eClutch%20Live2&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=iKOMediaGroup&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67079" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/e71e2cd09b3e57e682b809f276e02952.webp" group-title="Deportes y aire libre",WedoSports
+https://amg00735-amg00735c19-amgplt0407.playout.now3.amagi.tv/ts-eu-w1-n2/playlist/amg00735-amg00735c19-amgplt0407/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&ifa_type=aaid&is_lat=0&us_privacy=1---&channel_name=Wedo-sportDE&content_livestream=&gpp_sid=&gpp=&ic=&idtype=&iu=&inv_partner_domain=&lmt=&network_name=VideoSolutionsAG&pod_ad_slots=&prodq=&schain=
+#EXTINF:-1 tvg-id="67051" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/5138bf86baf5baf659ef80daf1fc6e20.webp" group-title="Deportes y aire libre",Tennis Plus
+https://amg01935-amg01935c1-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg01935-amg01935c1-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=TennisAustralia&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67032" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/f9f3a1afb673c3aa3ab5f32155292456.webp" group-title="Deportes y aire libre",Barca 24H
+https://amg17560-amg17560c1-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg17560-amg17560c1-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=FC%20Barcelona&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67031" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/e8ebaa0c2521c180d4d3803089f89c8a.webp" group-title="Deportes y aire libre",DAZN Ringside
+https://amg00451-amg00451c23-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg00451-amg00451c23-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67003" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/2e068a70e6b82ca416c04fd42438b493.webp" group-title="Deportes y aire libre",RUGBY-ZONE-TV
+https://streams2.sofast.tv/ptnr-xiaomi/title-RUGBY_ZONE_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/8cff51e8-8824-4294-8091-87c913fee721/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="67000" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/1ade7abfd3a76f2a444ee36baa4bce7f.webp" group-title="Deportes y aire libre",BILLIARDS-PLUS
+https://streams2.sofast.tv/ptnr-xiaomi/title-billiards__Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/206ace92-00d9-4376-bc94-383267ac85bc/master.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66802" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/f095ee5666f0043ae2869ce73b1cccbf.webp" group-title="Deportes y aire libre",Billiard TV
+https://api-ott.tripleb.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=triplebmedia&content_channel=billiardtv&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=179&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67002" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/defc83f842768a8bf9d4301353bbfbc0.webp" group-title="Deportes y aire libre",X-TREM SPORTS
+https://streams2.sofast.tv/ptnr-xiaomi/title-XTREM-SPORTS-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/be7e71e9-0612-44d5-8aaf-b871575226ca/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66394" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/e00e4614bba2cc49863344c8879890b2.webp" group-title="Deportes y aire libre",NAUTICAL-CHANNEL
+https://streams2.sofast.tv/ptnr-xiaomi/title-Nautical_TV_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/a2739c13-1535-4498-a75b-cba31f699fea/index.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66409" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/df4c8eb65f7adc4dd647cd1b0b19332a.webp" group-title="Deportes y aire libre",CHRONO-TV-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-CHRONO-TV-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/9b78108c-605e-4499-a5e2-51beecdb29ca/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66390" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/d9077d7e8ef9dc20279c421e4c500a72.webp" group-title="Deportes y aire libre",GOAL-TV
+https://streams2.sofast.tv/ptnr-xiaomi/title-Goal_TV_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/ac6d8d8c-6cd5-4a32-8b55-69aefdf9eba2/master.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="66037" tvg-logo="https://cdn.awsde0-fusion.fds.api.mi-img.com/mitv/10007/0/449001f874a6772735585ebc7c2d4fff.webp" group-title="Deportes y aire libre",ShadeTV
+https://1c5fec19e84f40c697666f6104f38be9.mediatailor.us-east-1.amazonaws.com/v1/master/0fb304b2320b25f067414d481a779b77db81760d/Xiaomi-eu_ShadeTV/playlist.m3u8?ads.wurl_channel=1453&ads.wurl_name=ShadeTV&ads.coppa=0&ads.device_id=00000000-0000-4000-8000-000000000000&ads.dnt=0&ads.us_privacy=1---&ads.gdpr=0&ads.consent=&ads.app_name=Xiaomi%20TV%2B&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.ifa_type=aaid&ads.custom=&ads.device_make=Xiaomi&ads.device_model=TV&ads.nonce=
+#EXTINF:-1 tvg-id="66269" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/a3d20c838eadc201b91dde82b7be6a0e.webp" group-title="Deportes y aire libre",KOZOOM-ENG
+https://streams2.sofast.tv/ptnr-xiaomi/title-KOZOOM-ENG_Xiaomi/v1/master/611d79b11b77e2f571934fd80ca1413453772ac7/4a4ee35d-60a3-4502-9f34-1704600c65f2/manifest.m3u8?ads.ifa_type=aaid&ads.app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&ads.app_bundle=com.mitv.tvhome.mitvplus&ads.app_name=Xiaomi%20TV%2B&ads.consent=&ads.gdpr=0&ads.us_privacy=1---&ads.is_lat=0&ads.did=00000000-0000-4000-8000-000000000000
+#EXTINF:-1 tvg-id="67116" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/3440798a3f94c9ce96a68f88a156fcbe.webp" group-title="Entretenimiento",Piel Salvaje
+https://amg00735-amg00735c70-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n1/playlist/amg00735-amg00735c70-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=WedoAmorPielSalvajeENG&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=VideoSolutions&pod_ad_slots=&prodq=&schain=&us_privacy=1---&app_category=&content_context=&custom_7=&device_language=&device_type=
+#EXTINF:-1 tvg-id="67023" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/1bf31bfb938371f24d1e98ccf31df57b.webp" group-title="Entretenimiento",Caracol Mix
+https://api-ott.caracoltv.com/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=caracolmix&content_channel=caracolmix&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=13&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+#EXTINF:-1 tvg-id="67082" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/6aa716ee1d6713144d8f85756027abbc.webp" group-title="Entretenimiento",WedoAmor
+https://amg00735-amg00735c24-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg00735-amg00735c24-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=WedoAmor&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=VideoSolutionsAG&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="67058" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/tv_plus/channel/0/7e1093f28adcf4a4773440da89557507.webp" group-title="Entretenimiento",Cest Pas Sorcier
+https://amg30706-amg30706c2-amgplt0068.playout.now3.amagi.tv/ts-us-w2-n2/playlist/amg30706-amg30706c2-amgplt0068/playlist.m3u8?app_bundle=com.mitv.tvhome.mitvplus&app_name=Xiaomi%20TV%2B&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&channel_name=&content_livestream=&coppa=0&did=00000000-0000-4000-8000-000000000000&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&ic=&idtype=&ifa_type=aaid&inv_partner_domain=&is_lat=0&iu=&lmt=&network_name=House%20of%20Joy%20Studio&pod_ad_slots=&prodq=&schain=&us_privacy=1---
+#EXTINF:-1 tvg-id="66800" tvg-logo="https://de-fds-img.cdn.pandora.xiaomi.com/mitv/10007/0/a34b7b0a7f0a5e51c04b1b8ca20c774c.webp" group-title="Entretenimiento",Bark TV
+https://api-ott.tripleb.tv/loggingmediaurlpassthrough/a.m3u8?app_name=Xiaomi%20TV%2B&app_bundle=com.mitv.tvhome.mitvplus&app_store_url=https%3A%2F%2Fplay.google.com%2Fstore%2Fapps%2Fdetails%3Fid%3Dcom.mitv.tvhome.mitvplus&content_network=triplebmedia&content_channel=barktv&ifa_type=aaid&device_id=00000000-0000-4000-8000-000000000000&platform=androidtv&device_type=tv&player_height=720&player_width=1280&is_lat=0&us_privacy=1---&gdpr=0&consent=&device_language=es&partner=xiaomi_syndication&connection=wifi&language=en&device_height=720&device_width=1280&version=12.5&id=851&avod=1&slated_vod=0&streaming_format=hls&vid=a.m3u8
+
