@@ -400,6 +400,90 @@ def generate(catalog, live_channels, categories, pluto_session):
     return "".join(lines), count
 
 
+def diagnose_music_streams(catalog, live_channels, categories, pluto_session):
+    """
+    Solicita el manifiesto HLS real de cada canal musical y muestra
+    el estado HTTP y el cuerpo de error (si existe), sin imprimir el JWT.
+    """
+    print("\\nComprobando manifiestos HLS de los canales de música...")
+
+    probe_session = requests.Session()
+    probe_session.headers.update(HEADERS)
+    probe_session.headers.update({
+        "Accept": "application/vnd.apple.mpegurl,application/x-mpegURL,*/*",
+    })
+
+    checked = set()
+
+    for catalog_id, channel in catalog.items():
+        catalog_original_id = channel.get("original_id")
+        live = (
+            live_channels.get(catalog_id)
+            or live_channels.get(catalog_original_id)
+            or {}
+        )
+
+        stream_id = (
+            live.get("id")
+            or catalog_original_id
+            or catalog_id
+        )
+
+        name = live.get("name") or channel.get("name") or ""
+        group = (
+            categories.get(stream_id)
+            or categories.get(catalog_id)
+            or channel.get("group")
+            or ""
+        )
+
+        is_music = (
+            str(group).strip().lower() in ("música", "musica", "music")
+            or "music" in str(name).lower()
+            or "rock" in str(name).lower()
+        )
+
+        if not is_music or not stream_id or stream_id in checked:
+            continue
+
+        checked.add(stream_id)
+        url = build_stream_url(stream_id, pluto_session)
+
+        try:
+            response = probe_session.get(
+                url,
+                timeout=(10, 20),
+                stream=True,
+                allow_redirects=True,
+            )
+
+            body = ""
+            try:
+                first_chunk = next(response.iter_content(chunk_size=2048), b"")
+                body = first_chunk.decode("utf-8", errors="replace")
+            except Exception as exc:
+                body = f"<error leyendo respuesta: {exc}>"
+
+            # Evitamos mostrar tokens o URLs firmadas en los registros.
+            body = body[:700].replace("\\n", " ").replace("\\r", " ")
+            print(
+                f"[MUSIC HTTP] name={name} id={stream_id} "
+                f"status={response.status_code} "
+                f"content_type={response.headers.get('Content-Type', '')} "
+                f"server={response.headers.get('Server', '')} "
+                f"body={body!r}"
+            )
+            response.close()
+
+        except requests.RequestException as exc:
+            print(
+                f"[MUSIC HTTP] name={name} id={stream_id} "
+                f"request_error={type(exc).__name__}: {exc}"
+            )
+
+    probe_session.close()
+
+
 def validate_playlist(content, count):
     """Comprueba que la playlist contiene URLs directas válidas."""
     if not content.startswith("#EXTM3U"):
@@ -441,6 +525,13 @@ def main():
     )
 
     validate_playlist(content, count)
+
+    diagnose_music_streams(
+        catalog,
+        live_channels,
+        categories,
+        pluto_session,
+    )
 
     temp_file = OUTPUT + ".tmp"
 
