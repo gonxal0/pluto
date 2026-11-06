@@ -329,19 +329,6 @@ def generate(catalog, live_channels, categories, pluto_session):
         if not stream_id or stream_id in used_ids:
             continue
 
-        if str(channel.get("group", "")).strip().lower() in (
-            "música", "musica", "music"
-        ):
-            print(
-                "[MUSIC ID] "
-                f"name={live.get('name') or channel.get('name')} "
-                f"catalog_id={catalog_id} "
-                f"catalog_original_id={catalog_original_id} "
-                f"live_id={live.get('id')} "
-                f"live_original_id={live.get('original_id')} "
-                f"stream_id={stream_id} "
-                f"available={live.get('isAvailable', live.get('available'))}"
-            )
 
         name = (
             live.get("name")
@@ -359,6 +346,21 @@ def generate(catalog, live_channels, categories, pluto_session):
             or channel.get("group")
             or "Pluto TV"
         )
+
+        if str(group).strip().lower() in (
+            "música", "musica", "music"
+        ) or "music" in str(name).lower() or "rock" in str(name).lower():
+            print(
+                "[MUSIC ID] "
+                f"name={name} "
+                f"group={group} "
+                f"catalog_id={catalog_id} "
+                f"catalog_original_id={catalog_original_id} "
+                f"live_id={live.get('id')} "
+                f"live_original_id={live.get('original_id')} "
+                f"stream_id={stream_id} "
+                f"available={live.get('isAvailable', live.get('available'))}"
+            )
 
         chno = channel.get("chno", "")
 
