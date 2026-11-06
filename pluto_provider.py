@@ -212,7 +212,10 @@ def get_pluto_data(token):
             channel_map[channel_id] = channel
 
         if original_id:
-            channel_map[original_id] = channel
+            # El ID canónico (channel.id) siempre tiene prioridad sobre
+            # los alias original_id para evitar que un alias sobrescriba
+            # otro canal con el mismo identificador.
+            channel_map.setdefault(original_id, channel)
 
     category_map = {}
 
@@ -307,21 +310,38 @@ def generate(catalog, live_channels, categories, pluto_session):
 
     for catalog_id, channel in ordered_channels:
 
-        # En el catálogo de matthuisman, original_id es el ID
-        # que se utiliza para construir la URL de reproducción.
+        # Resolvemos primero el registro vivo usando el ID del catálogo.
+        # Si Pluto devuelve un ID canónico distinto, ese es el que debe
+        # utilizarse en el endpoint /channel/{id}/master.m3u8.
+        catalog_original_id = channel.get("original_id")
+        live = (
+            live_channels.get(catalog_id)
+            or live_channels.get(catalog_original_id)
+            or {}
+        )
+
         stream_id = (
-            channel.get("original_id")
+            live.get("id")
+            or catalog_original_id
             or catalog_id
         )
 
         if not stream_id or stream_id in used_ids:
             continue
 
-        live = (
-            live_channels.get(stream_id)
-            or live_channels.get(catalog_id)
-            or {}
-        )
+        if str(channel.get("group", "")).strip().lower() in (
+            "música", "musica", "music"
+        ):
+            print(
+                "[MUSIC ID] "
+                f"name={live.get('name') or channel.get('name')} "
+                f"catalog_id={catalog_id} "
+                f"catalog_original_id={catalog_original_id} "
+                f"live_id={live.get('id')} "
+                f"live_original_id={live.get('original_id')} "
+                f"stream_id={stream_id} "
+                f"available={live.get('isAvailable', live.get('available'))}"
+            )
 
         name = (
             live.get("name")
