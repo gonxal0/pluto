@@ -1,79 +1,156 @@
 #!/usr/bin/env python3
-"""Refresh the Xiaomi TV+ M3U from the publicly maintained upstream playlist.
-
-Xiaomi TV+ does not publish a documented playlist export API. The source below
-is a community-maintained list; this script mirrors its current entries without
-rewriting their stream URLs, so upstream geo limits and playback behavior remain
-in effect.
-"""
+"""Build a Spain-filtered Xiaomi TV+ M3U from Xiaomi's own catalog API."""
 
 from __future__ import annotations
 
+import hashlib
+import hmac
+import json
 import os
+import re
 import tempfile
+import urllib.parse
+import urllib.request
 from pathlib import Path
-from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
 
 
-SOURCE_URL = "https://www.apsattv.com/xiaomi.m3u"
+API_BASE = "https://mitvplus.global.mi.com"
+API_PATH = "/mitv/guide"
+APP_ID = "4"
+REGION = "ES"
+LANGUAGE = "es"
+# These values are embedded in the Xiaomi TV+ APK's PWAppInterceptor.
+SIGNING_TOKEN = "0f9dfa001cba164d7bda671649c50abf"
+SIGNING_KEY = "581582928c881b42eedce96331bff5d3"
+APP_BUNDLE = "com.mitv.tvhome.mitvplus"
+APP_NAME = "Xiaomi TV+"
+APP_STORE_URL = "https://play.google.com/store/apps/details?id=com.mitv.tvhome.mitvplus"
 OUTPUT = Path(__file__).with_name("xiaomi.m3u")
-USER_AGENT = "Mozilla/5.0 (compatible; XiaomiPlaylistUpdater/1.0)"
+USER_AGENT = "okhttp/4.9.3"
+
+GROUP_NAMES = {
+    "For You": "Para ti",
+    "New on XTV+": "Nuevo en Xiaomi TV+",
+    "Music": "Música",
+    "Movie": "Cine",
+    "Lifestyle": "Estilo de vida",
+    "Sports & Outdoor": "Deportes y aire libre",
+    "Entertainment": "Entretenimiento",
+}
 
 
-def fetch_playlist() -> str:
-    request = Request(
-        SOURCE_URL,
-        headers={"User-Agent": USER_AGENT, "Accept": "audio/x-mpegurl, text/plain, */*"},
+def _catalog_url() -> str:
+    params = [("app", APP_ID), ("region", REGION), ("dlg", LANGUAGE)]
+    query = urllib.parse.urlencode(params)
+    signed_text = f"{API_PATH}?{query}&token={SIGNING_TOKEN}"
+    opaque = hmac.new(
+        SIGNING_KEY.encode("utf-8"), signed_text.encode("utf-8"), hashlib.sha1
+    ).hexdigest()
+    return f"{API_BASE}{API_PATH}?{query}&opaque={opaque}"
+
+
+def fetch_catalog() -> dict:
+    request = urllib.request.Request(
+        _catalog_url(),
+        headers={"User-Agent": USER_AGENT, "Accept": "application/json"},
     )
-
     try:
-        with urlopen(request, timeout=30) as response:
-            if response.status != 200:
-                raise RuntimeError(f"Upstream returned HTTP {response.status}.")
+        with urllib.request.urlopen(request, timeout=30) as response:
             body = response.read()
-    except (HTTPError, URLError, TimeoutError) as exc:
-        raise RuntimeError(f"Could not download the Xiaomi TV+ source: {exc}") from exc
+    except Exception as exc:
+        raise RuntimeError(f"Could not fetch Xiaomi TV+ catalog: {exc}") from exc
 
     try:
-        content = body.decode("utf-8-sig")
-    except UnicodeDecodeError as exc:
-        raise RuntimeError("The Xiaomi TV+ source is not valid UTF-8.") from exc
+        catalog = json.loads(body.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RuntimeError("Xiaomi TV+ returned invalid JSON.") from exc
 
-    return content.replace("\r\n", "\n").replace("\r", "\n")
+    if catalog.get("status") != 0:
+        raise RuntimeError(f"Xiaomi TV+ API returned status {catalog.get('status')}.")
+    if not isinstance(catalog.get("data", {}).get("blocks"), list):
+        raise RuntimeError("Xiaomi TV+ response has no guide sections.")
+    return catalog
 
 
-def validate_playlist(content: str) -> int:
-    lines = [line.strip() for line in content.splitlines() if line.strip()]
+def _play_url(channel: dict) -> str:
+    """Resolve playback macros in Xiaomi's own playurl template."""
+    url = channel.get("playurl") or channel.get("intent") or ""
+    if not url.startswith(("https://", "http://")):
+        return ""
 
-    if not lines or lines[0] != "#EXTM3U":
-        raise RuntimeError("The Xiaomi TV+ source has no #EXTM3U header.")
+    values = {
+        "app_bundle": APP_BUNDLE,
+        "app_name": APP_NAME,
+        "app_store_url": APP_STORE_URL,
+        "ifa_type": "aaid",
+        "device_id": "00000000-0000-4000-8000-000000000000",
+        "gdpr": "0",
+        "consent": "",
+        "is_lat": "0",
+        "us_privacy": "1---",
+        "platform": "androidtv",
+        "device_type": "tv",
+        "device_height": "720",
+        "device_width": "1280",
+        "device_language": LANGUAGE,
+        "device_make": "Xiaomi",
+        "device_model": "TV",
+        "custom": "",
+        "nonce": "",
+    }
+    for key, value in values.items():
+        encoded = urllib.parse.quote(value, safe="")
+        url = url.replace("{" + key + "}", encoded)
+        url = url.replace("%7B" + key.upper() + "%7D", encoded)
+        url = url.replace("[" + key.upper() + "]", encoded)
+        url = url.replace("%5B" + key.upper() + "%5D", encoded)
 
-    channel_count = sum(line.startswith("#EXTINF:") for line in lines)
-    stream_count = sum(
-        not line.startswith("#") and line.startswith(("http://", "https://"))
-        for line in lines
-    )
+    # The APK fills these channel/ad metadata fields from its own ad config.
+    url = url.replace("REPLACE_WITH_URL_ENCODED_URL", urllib.parse.quote(APP_STORE_URL, safe=""))
+    url = re.sub(r"REPLACE_[A-Z_]+", "", url)
+    url = re.sub(r"\{[^{}]*\}", "", url)
+    url = urllib.parse.quote(url, safe=":/?&=%#[]@!$'()*+,;~-._")
+    return url
 
-    if channel_count == 0:
-        raise RuntimeError("The Xiaomi TV+ source contains no channels.")
-    if stream_count < channel_count:
-        raise RuntimeError(
-            f"Playlist has {channel_count} channels but only {stream_count} HTTP(S) streams."
-        )
 
-    return channel_count
+def _attr(value: object) -> str:
+    return str(value or "").replace('"', "'").replace("\r", " ").replace("\n", " ")
+
+
+def render_playlist(catalog: dict) -> tuple[str, int]:
+    lines = ["#EXTM3U"]
+    count = 0
+    for block in catalog["data"]["blocks"]:
+        group = GROUP_NAMES.get(block.get("title", ""), block.get("title", "Xiaomi TV+"))
+        for channel in block.get("channels", []):
+            regions = {str(region).upper() for region in channel.get("regions", [])}
+            if not regions.intersection({"ES", "GLOBAL", "ALL"}):
+                continue
+
+            name = str(channel.get("title") or "").strip()
+            url = _play_url(channel)
+            if not name or not url:
+                continue
+
+            channel_id = channel.get("id", "")
+            icon = (channel.get("images") or {}).get("icon", {}).get("link", "")
+            attributes = [f'tvg-id="{_attr(channel_id)}"']
+            if icon:
+                attributes.append(f'tvg-logo="{_attr(icon)}"')
+            attributes.append(f'group-title="{_attr(group)}"')
+            lines.append(f"#EXTINF:-1 {' '.join(attributes)},{name}")
+            lines.append(url)
+            count += 1
+
+    if count == 0:
+        raise RuntimeError("No channels available in Xiaomi TV+ for Spain.")
+    return "\n".join(lines) + "\n", count
 
 
 def write_atomically(content: str) -> None:
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     fd, temp_name = tempfile.mkstemp(
-        prefix=f".{OUTPUT.name}.",
-        suffix=".tmp",
-        dir=OUTPUT.parent,
-        text=True,
+        prefix=f".{OUTPUT.name}.", suffix=".tmp", dir=OUTPUT.parent, text=True
     )
-
     try:
         with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as target:
             target.write(content)
@@ -84,11 +161,11 @@ def write_atomically(content: str) -> None:
 
 
 def main() -> None:
-    content = fetch_playlist()
-    channel_count = validate_playlist(content)
-    write_atomically(content)
-    print(f"Updated {OUTPUT.name}: {channel_count} channels from {SOURCE_URL}")
+    playlist, count = render_playlist(fetch_catalog())
+    write_atomically(playlist)
+    print(f"Updated {OUTPUT.name}: {count} Spain-available channel entries from Xiaomi TV+ API")
 
 
 if __name__ == "__main__":
     main()
+
