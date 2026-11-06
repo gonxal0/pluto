@@ -1,0 +1,45 @@
+name: Update Xiaomi TV+ playlist
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - "xiaomi_provider.py"
+      - ".github/workflows/xiaomi-playlist.yml"
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-playlist:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Refresh Xiaomi TV+ playlist
+        run: python xiaomi_provider.py
+
+      - name: Commit playlist when changed
+        run: |
+          if git diff --quiet -- xiaomi.m3u; then
+            echo "Xiaomi playlist is already current."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add xiaomi.m3u
+          git commit -m "Refresh Xiaomi TV+ playlist"
+          git push
